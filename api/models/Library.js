@@ -14,11 +14,10 @@ module.exports = {
     },
     modules: {
       collection: "module",
-      via: ""
+      via: "library"
     },
     team: {
-      model: "team",
-      via: "library"
+      model: "team"
     }
   }
 };
