@@ -10,16 +10,14 @@ Abide by the following rules when writing your code:
 * Be sure to modularize your code
 * Name your variables appropriately
 * Use a space before curly braces (for function definitions, conditionals, and loops) i.e. `function() {}`, `for(..) {}`
-* Structure your if/else statements with the `else if` and `else` on a new line as follows:
+* Structure your if/else statements with the `else if` and `else` on the same line as the previous conditional block's closing brace as follows:
 
 ```javascript
 if(...) {
   
-}
-else if(...) {
+} else if(...) {
   
-}
-else {
+} else {
   
 }
 ```
