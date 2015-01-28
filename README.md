@@ -2,7 +2,7 @@
 
 San Francisco cohort 3 final project
 
-1. Krish Rajagopalan
+#1 Krish Rajagopalan
 2. Mazdak
 3. Sean
 4. Chris Rhoton
@@ -10,4 +10,3 @@ San Francisco cohort 3 final project
 6. Cranky
 7. Connor
 666. Cranky
-
