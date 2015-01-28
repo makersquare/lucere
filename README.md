@@ -1,4 +1,3 @@
-
 # lucere
 
 San Francisco cohort 3 final project
@@ -11,4 +10,5 @@ San Francisco cohort 3 final project
 6. Cranky
 7. Connor
 6. Taenaynay
+6. Kenny Czadzeck
 
