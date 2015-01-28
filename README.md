@@ -1,7 +1,6 @@
 # lucere
 
 San Francisco cohort 3 final project
-<<<<<<< HEAD
 
 #1 Krish Rajagopalan
 2. Mazdak
@@ -13,6 +12,6 @@ San Francisco cohort 3 final project
 6. Taenaynay
 6. Kenny Czadzeck
 
-=======
-Tessa Kelly
->>>>>>> Add name to README.md
+
+8. Tessa Kelly
+
