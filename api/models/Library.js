@@ -8,7 +8,18 @@
 module.exports = {
 
   attributes: {
-
+    name: {
+      type: "string",
+      require: true
+    },
+    modules: {
+      collection: "module",
+      via: ""
+    },
+    team: {
+      model: "team",
+      via: "library"
+    }
   }
 };
 
