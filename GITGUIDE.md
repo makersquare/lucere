@@ -9,9 +9,11 @@ Follow the following Git steps when adding a new feature:
 
 AFTER Code Reviews
 
-5. Squash commits. `git log` `git rebase -i COMMIT_HASH`
-6. Pull remote dev branch to local dev. `git pull REMOTE_NAME dev`
-7. Rebase local feature branch onto dev. `git rebase dev`
-8. Push final version of local feature branch to github repository. `git push -f REMOTE_NAME BRANCH_NAME`
+1. Squash commits.
+  * Get commit hash of last commit to not be squashed. `git log`
+  * Squash. `git rebase -i COMMIT_HASH`
+2. Pull remote dev branch to local dev. `git pull REMOTE_NAME dev`
+3. Rebase local feature branch onto dev. `git rebase dev`
+4. Push final version of local feature branch to github repository. `git push -f REMOTE_NAME BRANCH_NAME`
 
 **Note:** DO NOT push broken code!!!
