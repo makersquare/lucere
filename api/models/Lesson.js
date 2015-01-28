@@ -17,6 +17,10 @@ module.exports = {
     body: {
       type: "string",
       required: true
+    },
+
+    module: {
+      model: "module"
     }
 
   }
