@@ -2,4 +2,5 @@
 
 San Francisco cohort 3 final project
 
-Sean Gibat
+Krish Rajagopalan
+Mazdak
