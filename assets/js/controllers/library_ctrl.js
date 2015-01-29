@@ -1,3 +1,3 @@
-app.controller("libraryCtrl", ["$scope", function($scope){
+app.controller("libraryCtrl", ["$scope", function($scope) {
 
 }]);
