@@ -1,10 +1,3 @@
 language: node_js
 node_js:
   - "0.10"
-deploy:
-  provider: heroku
-  api_key:
-    secure: HCbo7UaV2/rak9aBCZ099WmrW3EY4uR5DxRRqGIhq35KWHNdIKLwBCfjYpbRIMh9ZdQMl31GXhLmf+awqRwQAuFCyPTvdLuAoQPTMjXk6oFpJh/2+TfjiIgFRePnobcm8BeC5R9knocqkKWwya0Wgo0e+B6D6gOsBA8NS6icQqs=
-  app:
-    master: lucere-production
-    dev: lucere-staging
