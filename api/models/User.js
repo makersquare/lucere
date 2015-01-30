@@ -17,6 +17,13 @@ module.exports = {
       type: "email",
       required: true
     },
+    github: {
+      type: "string",
+      required: true
+    },
+    twitter: {
+      type: "string"
+    },
     teams: {
       collection: "team",
       via: "users"
