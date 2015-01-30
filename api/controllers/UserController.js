@@ -5,20 +5,19 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 var crypto = require("crypto");
+var https = require("https");
 
-var clientID = "client_id=" + process.env.CLIENT_ID, 
-    clientSecret = "&client_secret=" + process.env.CLIENT_SECRET,
-    url = "https://github.com/login/oauth/authorize?",
-    state;
-
-var https = require('https');
+var clientID = "client_id=" + process.env.CLIENT_ID;
+var clientSecret = "&client_secret=" + process.env.CLIENT_SECRET;
+var url = "https://github.com/login/oauth/authorize?";
+var state;
 
 var getRandomString = function() {
   var currentDate = (new Date()).valueOf().toString();
   var random = Math.random().toString();
-  var hashed = crypto.createHash('sha1').update(currentDate + random).digest('hex');
+  var hashed = crypto.createHash("sha1").update(currentDate + random).digest("hex");
   return hashed;
-}
+};
 
 // Makes post request to github to get accessToken
 // Calls checkUsers
@@ -37,7 +36,7 @@ var authenticate = function(req, res, accessCode) {
     var data = "";
     response.on("data", function(chunk) {
       data += chunk;
-    })
+    });
     response.on("end", function() {
       var accessToken = JSON.parse(data).access_token;
       checkUsers(req, res, accessToken);
@@ -46,7 +45,7 @@ var authenticate = function(req, res, accessCode) {
 
   request.write(clientID + clientSecret + "&code=" + accessCode);
   request.end();
-}
+};
 
 // Makes get request to github to get user information
 // Sets req.session.authenticate
@@ -56,7 +55,7 @@ var checkUsers = function(req, res, token) {
     path: "/user?access_token=" + token,
     method: "GET",
     headers: {
-      'user-agent': 'lucere'
+      "user-agent": "lucere"
     }
   };
 
@@ -73,10 +72,12 @@ var checkUsers = function(req, res, token) {
       userQuery.exec(function(err, data) {
         if(data.length == 1) {
           req.session.authenticated = true;
+          res.send("Authentication finished");
         } else {
           req.session.authenticated = false;
+          req.flash("errorMessage", ghUserName + " is not a user.");
+          res.redirect("/");
         }
-        res.send("Authentication finished");
       });
 
     });
@@ -86,6 +87,12 @@ var checkUsers = function(req, res, token) {
 
 module.exports = {
   login: function(req, res) {
+    res.locals.flash = {err: req.flash("errorMessage")};
+    res.view();
+    res.locals.flash = {};
+  },
+
+  auth: function(req, res) {
     if(req.session.authenticated) {
       res.send("Already logged in");
     }
@@ -102,13 +109,13 @@ module.exports = {
       authenticate(req, res, accessCode);
     } else {
       req.session.authenticated = false;
-      return res.forbidden('You are not permitted to perform this action.');
+      return res.forbidden("You are not permitted to perform this action.");
     }
   },
 
   logout: function(req, res) {
     req.session.authenticated = false;
-    res.send("Logged out");
+    res.redirect("/");
   }
 };
 

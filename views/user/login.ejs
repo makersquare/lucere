@@ -1,0 +1,8 @@
+<div class="container">
+  <% if(flash.err.length > 0) { %>
+    <p><%= flash.err[0] %></p>
+  <% } %>
+  <h2>Github Login</h2>
+  <p>Click the button below to login through Github.</p>
+  <a href="/user/auth"><button>Login</button></a>
+</div>

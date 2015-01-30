@@ -31,6 +31,7 @@ module.exports.policies = {
   '*': 'sessionAuth',
   UserController: {
     login: true,
+    auth: true,
     authorize: true,
     logout: true
   }
