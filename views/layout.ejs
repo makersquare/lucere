@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Lucere">
   <head>
     <title>New Sails App</title>
 
@@ -29,14 +29,13 @@
     -->
 
     <!--STYLES-->
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
+
   </head>
 
   <body>
-    <%- body %>
-
-
 
     <!--
         Client-side Templates
@@ -89,7 +88,13 @@
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/angular-resource/angular-resource.min.js"></script>
+    <script src="/vendor/angular-route/angular-route.min.js"></script>
     <script src="/js/app.js"></script>
     <!--SCRIPTS END-->
+
   </body>
 </html>

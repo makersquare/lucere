@@ -32,9 +32,10 @@ var jsFilesToInject = [
 
   // Bower components
   "vendor/jquery/dist/jquery.min.js",
+  "vendor/bootstrap/dist/js/bootstrap.min.js",
   "vendor/angular/angular.min.js",
   "vendor/angular-resource/angular-resource.min.js",
-  "vendor/bootstrap/dist/js/bootstrap.min.js",
+  "vendor/angular-route/angular-route.min.js",
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
