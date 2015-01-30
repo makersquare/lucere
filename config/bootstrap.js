@@ -121,10 +121,56 @@ module.exports.bootstrap = function(cb) {
     }
   ];
 
+  var library = {
+    id: 1, 
+    name: "library1"
+  };
 
-  User.create(users)
-    .exec(cb);
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  // cb();
+  var modules = [
+    {
+      id: 1,
+      name: "module1"
+    },
+    {
+      id: 2,
+      name: "module2"
+    }
+  ];
+
+  var lessons = [
+    {
+      id: 1,
+      title: "lesson1",
+      body: "Don't be a dick"
+    },
+    {
+      id: 2,
+      title: "lesson2",
+      body: "Brush your teeth three times a day"
+    },
+    {
+      id: 3,
+      title: "lesson3",
+      body: "Don't trust anyone"
+    }
+  ];
+
+  User.create(users).exec(function(err, user){
+    Library.create(library).exec(function(err, library) {
+      Module.create(modules).exec(function(err, modules) {
+        library.modules.add(1);
+        library.modules.add(2);
+        library.save();
+        Lesson.create(lessons).exec(function(err, lessons) {
+          modules[0].lessons.add(1);
+          modules[0].lessons.add(2);
+          modules[0].save();
+
+          modules[1].lessons.add(3);
+          modules[1].save();
+          cb();
+        });
+      });
+    });
+  });
 };
