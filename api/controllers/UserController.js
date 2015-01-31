@@ -76,7 +76,7 @@ var checkUsers = function(req, res, token) {
         } else {
           req.session.authenticated = false;
           req.flash("errorMessage", ghUserName + " is not a user.");
-          res.redirect("/");
+          res.redirect("/login");
         }
       });
 
