@@ -4,7 +4,6 @@
     <li>{{team.name}}</li>
     <ul ng-repeat="user in team.users">
       <li>{{user.name}}</li>
-      <button ng-click="edit(user.id)">Edit</button>
       <button ng-click="remove(user.id)">Remove</button>
     </ul>
   </ul>
