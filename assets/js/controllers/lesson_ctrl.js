@@ -1,3 +1,2 @@
-app.controller("lessonCtrl", ["$scope", function($scope){
-
+app.controller("lessonCtrl", ["$scope", function($scope) { 
 }]);
