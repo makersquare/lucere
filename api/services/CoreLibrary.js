@@ -8,13 +8,13 @@ module.exports = {
       Library.create({
         name: name
       }).exec(function(err, newLibrary){
-
+        cb("library created");
         coreLibrary.modules.forEach(function(coreModule){
           Module.create({
             name: coreModule.name,
             library: newLibrary
           }).exec(function(err, newModule){
-
+            newLibrary.modules.push(newModule);
             Module.findOne({
               id: coreModule.id
             }).populateAll().exec(function(err, populatedCoreModule){
@@ -30,9 +30,7 @@ module.exports = {
               });
             });
           });
-          newLibrary.modules.push(newModule);
         });
-        cb(newLibrary);
       });
     });
   }
