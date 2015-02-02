@@ -1,13 +1,12 @@
 module.exports = {
-  initialize: function(name, team, cb) {
+  initialize: function(name, cb) {
 
     Library.findOne({
       isCore: true
     }).populateAll().exec(function(err, coreLibrary){
 
       Library.create({
-        name: name,
-        team: team
+        name: name
       }).exec(function(err, newLibrary){
 
         coreLibrary.modules.forEach(function(coreModule){
