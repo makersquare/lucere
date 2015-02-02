@@ -155,6 +155,23 @@ module.exports.bootstrap = function(cb) {
     }
   ];
 
+  var teams = [
+    {
+      id: 1,
+      name: "Superteam",
+      users: [1,2,3],
+      library: [],
+      admins: []
+    },
+    {
+      id: 2,
+      name: "Teamsters",
+      users: [4,5,6],
+      library: [],
+      admins: []
+    }
+  ];
+
   User.create(users).exec(function(err, user){
     Library.create(library).exec(function(err, library) {
       Module.create(modules).exec(function(err, modules) {
@@ -168,7 +185,9 @@ module.exports.bootstrap = function(cb) {
 
           modules[1].lessons.add(3);
           modules[1].save();
-          cb();
+          Team.create(teams).exec(function(err, team) {
+            cb();
+          });
         });
       });
     });
