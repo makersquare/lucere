@@ -15,8 +15,7 @@ module.exports = {
     },
 
     body: {
-      type: "string",
-      required: true
+      type: "string"
     },
 
     module: {

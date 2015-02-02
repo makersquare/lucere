@@ -1,1 +1,33 @@
-<h1>This is the module template</h1>
+<div class="container">
+  <div class="row module-row">
+    <div class="col-xs-4">
+     <h2>Module View</h2>
+    </div>
+    <div class="col-xs-3 module-input">
+      <input type="text" class="form-control" ng-model="module.name">
+    </div>
+  </div>
+
+
+  <div class="row module-row">
+
+    <form>
+      <div class="col-xs-4">
+        <input type="text" placeholder="New Lesson" class="form-control" ng-model="newLessonTitle">
+      </div>
+      <div class="col-xs-4">
+        <input type="submit" value="&plus; Create Lesson For Module" class="btn btn-success" ng-click="createLesson(newLessonTitle)">
+      </div>
+    </form>
+  </div>
+
+
+
+  <div ng-repeat="lesson in module.lessons">
+    <a href="/#/team/{{params.teamId}}/library/{{params.libraryId}}/module/{{params.moduleId}}/lesson/{{lesson.id}}">
+      <li class="lessons-list">{{lesson.title}}</li>
+    </a>
+  </div>
+  <button class="btn module-save-button" ng-disabled="checkName(module.name)">Save Changes</button>
+</div>
+
