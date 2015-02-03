@@ -1,5 +1,9 @@
 <h1>San Francisco Cohorts</h1>
 <div>
+  <input type="text" placeholder="Github Username" ng-model="newUser.name">
+  <button ng-click="add()">Add new user</button>
+</div>
+<div>
   <ul>
     <li>{{team.name}}</li>
     <ul ng-repeat="user in team.users">

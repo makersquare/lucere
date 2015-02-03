@@ -116,6 +116,12 @@ module.exports = {
   logout: function(req, res) {
     req.session.authenticated = false;
     res.redirect("/");
+  },
+
+  github: function(req, res) {
+    User.findOne().where({github: req.param("github")}).exec(function(err, user) {
+      res.send(user)
+    })
   }
 };
 
