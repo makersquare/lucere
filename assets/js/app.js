@@ -17,6 +17,10 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
         controller: "lessonCtrl",
         templateUrl: "/js/templates/lesson_template.html"
       })
+      .when("/user/create", {
+        controller: "userCreationCtrl",
+        templateUrl: "/js/templates/user_create_template.html"
+      })
       .when("/user/:userId", {
         controller: "userCtrl",
         templateUrl: "/js/templates/user_profile_template.html"
