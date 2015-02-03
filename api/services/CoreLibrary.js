@@ -24,8 +24,6 @@ module.exports = {
       .spread(function(){
         var newModule = nModule;
         var asyncResults = Array.prototype.slice.call(arguments);
-        newModule.lessons.add(asyncResults);
-        newModule.save();
       });
     };
 
@@ -46,8 +44,6 @@ module.exports = {
       var modules = modules.slice(2, modules.length);
       var newModules = modules.map(function(module){
         return cloneModule(nlib.id, module, function(newModule){
-          nlib.modules.add(newModule);
-          nlib.save();
         });
       });
       newModules.unshift(nlib);
