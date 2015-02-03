@@ -1,4 +1,4 @@
-var app = angular.module("Lucere", ["ngResource", "ngRoute"])
+var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
   .config(["$routeProvider", function($routeProvider) {
     $routeProvider
       .when("/team/:teamId", {
