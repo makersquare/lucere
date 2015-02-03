@@ -34,6 +34,7 @@ module.exports.routes = {
   
   'get /login': 'UserController.login',
   'get /logout': 'UserController.logout',
+  'get /user/findby/github/:github': 'UserController.github',
   '/': {
     view: 'layout'
   }

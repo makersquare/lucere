@@ -68,10 +68,11 @@ var checkUsers = function(req, res, token) {
       var ghUserName = JSON.parse(userInfo).login;
 
       // Compares github name to user table to see if user is allowed access
-      var userQuery = User.find().where({github: ghUserName});
+      var userQuery = User.find().where({github: ghUserName}).populateAll();
       userQuery.exec(function(err, data) {
         if(data.length == 1) {
           req.session.authenticated = true;
+          req.session.currentUser = data[0];
           res.send("Authentication finished");
         } else {
           req.session.authenticated = false;
@@ -115,7 +116,30 @@ module.exports = {
 
   logout: function(req, res) {
     req.session.authenticated = false;
+    delete req.session.currentUser;
     res.redirect("/");
+  },
+
+  github: function(req, res) {
+    User.findOne()
+      .where({github: req.param("github")})
+      .populateAll()
+      .exec(function(err, user) {
+        if(!err && user) {
+          res.send(user);
+        } else {
+          res.status(500).send(err);
+        }
+      });
+  },
+
+  currentuser: function(req, res) {
+    if(req.session.authenticated && req.session.currentUser) {
+      res.redirect('/user/' + req.session.currentUser.id);
+    } else {
+      res.json(null);
+    }
+
   }
 };
 
