@@ -123,7 +123,8 @@ module.exports.bootstrap = function(cb) {
 
   var library = {
     id: 1, 
-    name: "library1"
+    name: "library1",
+    isCore: true
   };
 
   var modules = [

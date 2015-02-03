@@ -18,6 +18,9 @@ module.exports = {
     },
     team: {
       model: "team"
+    },
+    isCore: {
+      type: "boolean"
     }
   }
 };
