@@ -119,9 +119,12 @@ module.exports = {
   },
 
   github: function(req, res) {
-    User.findOne().where({github: req.param("github")}).exec(function(err, user) {
-      res.send(user)
-    })
+    User.findOne()
+      .where({github: req.param("github")})
+      .populateAll()
+      .exec(function(err, user) {
+        res.send(user)
+      });
   }
 };
 
