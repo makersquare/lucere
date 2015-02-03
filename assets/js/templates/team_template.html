@@ -1,14 +1,12 @@
-<h1>San Francisco Cohorts</h1>
-<div>
-  <input type="text" placeholder="Github Username" ng-model="newUser.name">
-  <button ng-click="add()">Add new user</button>
-</div>
-<div>
-  <ul>
-    <li>{{team.name}}</li>
+
+  <h1>Cohort: {{team.name}}</h1>
+  <div>
+    <input type="text" placeholder="Github Username" ng-model="newUser.name">
+    <button ng-click="add()">Add new user</button>
+  </div>
+  <br>
+  <div>
     <ul ng-repeat="user in team.users">
-      <li>{{user.name}}</li>
-      <button ng-click="remove(user.id)">Remove</button>
+      <li>{{user.name}} <button ng-click="remove(user.id)">Remove</button></li>
     </ul>
-  </ul>
-</div>
+  </div>
