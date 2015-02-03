@@ -28,13 +28,13 @@ module.exports.policies = {
 
   // '*': true,
 
-  '*': 'sessionAuth',
-  UserController: {
-    login: true,
-    auth: true,
-    authorize: true,
-    logout: true
-  }
+  // '*': 'sessionAuth',
+  // UserController: {
+  //   login: true,
+  //   auth: true,
+  //   authorize: true,
+  //   logout: true
+  // }
 
   /***************************************************************************
   *                                                                          *
