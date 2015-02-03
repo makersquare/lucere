@@ -1,9 +1,11 @@
 <h1>Create New User</h1>
 
-<label for="new-user-name">Name:</label>: <input type="text" ng-model="newUser.name" id="new-user-name"><br>
+<form name="createUserForm" novalidate ng-submit="createUser()">
+  <label for="new-user-name">Name:</label> <input type="text" ng-model="newUser.name" id="new-user-name" required><br>
 
-<label for="new-user-email">E-mail:</label> <input type="text" ng-model="newUser.email" id="new-user-email"><br>
+  <label for="new-user-email">E-mail:</label> <input type="email" ng-model="newUser.email" id="new-user-email" required><br>
 
-<label for="new-user-github">Github Username:</label><input type="text" ng-model="newUser.githubName"><br><br>
+  <label for="new-user-github">Github Username:</label><input type="text" ng-model="newUser.githubName" required><br><br>
 
-<button ng-click="createUser()" id="new-user-github">Create</button>
+  <button type="submit" id="new-user-github" ng-disabled="createUserForm.$invalid">Create</button>
+</form>
