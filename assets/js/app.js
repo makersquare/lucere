@@ -17,5 +17,8 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute"])
         controller: "lessonCtrl",
         templateUrl: "/js/templates/lesson_template.html"
       })
+      .when("/login", {
+        templateUrl: "/js/templates/login_template.html"
+      })
       .otherwise({redirectTo: "/"});
   }]);
