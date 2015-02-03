@@ -42,13 +42,14 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
   };
 
   $scope.addTeam = function() {
+    var newTeamName = $scope.newTeam.name;
+    $scope.newTeam.name = " ";
     var newTeam = new Team({
-      name: $scope.newTeam.name,
+      name: newTeamName,
       admins: [currentUser],
       users: [currentUser]
     });
     newTeam.$save();
-
   }
 
 }]);

@@ -8,11 +8,23 @@ app.controller("userCtrl", ["$scope", "$routeParams", "User", "AuthService", fun
   });
 
   $scope.update = function() {
-    var $elems = angular.element("#user-profile").children("input")
+    var $elem = angular.element("#user-profile");
+    var $elems = $elem.children("input")
+
     $scope.user.name = angular.element($elems[0]).val();
     $scope.user.email = angular.element($elems[1]).val();
     $scope.user.twitter = angular.element($elems[3]).val();
     $scope.user.$update();
+
+    $elem.children().remove();
+    $elem.append("<p>"+ $scope.user.name + "</p>");
+    $elem.append("<p>" + $scope.user.email + "</p>");
+    $elem.append("<p>" + $scope.user.github + "</p>");
+    $elem.append("<p>" + $scope.user.twitter + "<p>");
+    $elem.append("<button>Edit</button>")
+    $elem.find("button").on("click", function() {
+      $scope.editUser();
+    });
   }
 
   $scope.editUser = function() {
