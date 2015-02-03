@@ -1,37 +1,56 @@
 module.exports = {
-  init: function(name, cb) {
 
-    Library.findOne({
-      isCore: true
-    }).populateAll().exec(function(err, coreLibrary) {
+  clone: function(libraryName, callback) {
 
-      Library.create({
-        name: name
-      }).exec(function(err, newLibrary) {
-        cb(newLibrary); //execute callback on newLibrary and continue to populate it
-        coreLibrary.modules.forEach(function(coreModule) {
-          Module.create({
-            name: coreModule.name,
-            library: newLibrary
-          }).exec(function(err, newModule){
-            newLibrary.modules.push(newModule);
-            Module.findOne({
-              id: coreModule.id
-            }).populateAll().exec(function(err, populatedCoreModule) {
+    var cloneLesson = function(coreLesson, callback) {
+      Lesson.create({
+        title: coreLesson.title,
+        body: coreLesson.body,
+        module: coreLesson.module
+      }).exec(function(err, newLesson){
+        callback(newLesson);
+      });
+    };
 
-              populatedCoreModule.lessons.forEach(function(err, coreLesson) {
-                Lesson.create({
-                  title: coreLesson.title,
-                  body: coreLesson.body,
-                  module: newModule
-                }).exec(function(err, newLesson) {
-                  newModule.lessons.push(newLesson);
-                });
-              });
-            });
+    var cloneModule = function(coreModule, callback) {
+      var newMod;
+      Module.create({
+        name: coreModule.name,
+        library: coreModule.library
+      })
+      .then(function(newModule){
+        newMod = newModule;
+        return coreModule.lessons.map(function(lesson){
+          return cloneLesson(lesson, function(newLesson){
+            newMod.lessons.push(newLesson);
           });
         });
+      })
+      .spread(function(asyncCalls){
+        callback(newMod);
       });
+    };
+
+    var coreLib, newLib;
+    var coreLibPromise = Library.findOne({isCore: true}).populate("modules");
+    var newLibPromise = Library.create({name: libraryName});
+
+    coreLibPromise.then(function(clib){
+       return [clib, newLibPromise];
+    })
+
+    .then(function(clib, nlib){
+      coreLib = clib;
+      newLib = nlib;
+      return coreLib.modules.map(function(module){
+        return cloneModule(module, function(newModule){
+          newLib.modules.push(newModule);
+        });
+      });
+    })
+
+    .spread(function(asyncCalls){
+      callback(newLib);
     });
   }
 };
