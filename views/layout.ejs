@@ -38,8 +38,16 @@
   </head>
 
   <body>
-    
-    <div ng-view=""></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-9 main">
+        <ng-view></ng-view>
+      </div>
+    </div>
+  </div>
+
     <!--
         Client-side Templates
         ========================
@@ -100,9 +108,11 @@
     <script src="/vendor/angular-route/angular-route.min.js"></script>
     <script src="/vendor/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/controllers/header_ctrl.js"></script>
     <script src="/js/controllers/lesson_ctrl.js"></script>
     <script src="/js/controllers/library_ctrl.js"></script>
     <script src="/js/controllers/module_ctrl.js"></script>
+    <script src="/js/controllers/sidebar_ctrl.js"></script>
     <script src="/js/controllers/team_ctrl.js"></script>
     <script src="/js/directives/admin_lesson_directive.js"></script>
     <script src="/js/directives/library_directive.js"></script>
