@@ -125,7 +125,11 @@ module.exports = {
       .where({github: req.param("github")})
       .populateAll()
       .exec(function(err, user) {
-        res.send(user)
+        if(!err && user) {
+          res.send(user);
+        } else {
+          res.status(500).send(err);
+        }
       });
   },
 
