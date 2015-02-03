@@ -1,6 +1,6 @@
-app.directive("moduleView", ["$route", "Module", "Lesson", function($route, Module, Lesson) {
+app.directive("adminModuleDirective", ["$route", "Module", "Lesson", function($route, Module, Lesson) {
   return {
-    templateUrl: "/js/templates/module_view_template.html",
+    templateUrl: "/js/templates/admin_module_template.html",
     link: function(scope, attr, elem) {
       scope.params = $route.current.params;
       scope.module = Module.get({id: scope.params.moduleId}, function(data) {
