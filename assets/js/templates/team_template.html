@@ -7,6 +7,6 @@
   <br>
   <div>
     <ul ng-repeat="user in team.users">
-      <li>{{user.name}} <button ng-click="remove(user.id)">Remove</button></li>
+      <li>{{user.name}} <button ng-click="remove(user.id)" ng-show="isAdmin">Remove</button></li>
     </ul>
   </div>
