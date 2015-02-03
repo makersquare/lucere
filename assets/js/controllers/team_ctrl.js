@@ -2,7 +2,9 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
   var teamId = parseInt($routeParams.teamId);
   $scope.team = Team.get({id: teamId});
   $scope.newUser = {};
+  $scope.newTeam = {};
   $scope.isAdmin = false;
+  $scope.isCore  = teamId === 1;
   var currentUser;
   AuthService.currentUser(function(user) {
     currentUser = user;
@@ -11,7 +13,7 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
     }, false);
   });
   
-  $scope.add = function() {
+  $scope.addUser = function() {
     var userPromise = User.UserFindBy.get({github: $scope.newUser.name});
     userPromise.$promise.then(function(user) {
       $scope.team.users.push(user);
@@ -27,5 +29,14 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
     });
     $scope.team.$update();
   };
+
+  $scope.addTeam = function() {
+    var newTeam = new Team({
+      name: $scope.newTeam.name,
+      admins: [currentUser],
+      users: [currentUser]
+    });
+    newTeam.$save();
+  }
 
 }]);

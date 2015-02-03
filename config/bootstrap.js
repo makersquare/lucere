@@ -161,7 +161,7 @@ module.exports.bootstrap = function(cb) {
       name: "Superteam",
       users: [1,2,3],
       library: [],
-      admins: []
+      admins: [2]
     },
     {
       id: 2,

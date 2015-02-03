@@ -9,9 +9,9 @@ app.factory("AuthService", ["$resource", "$http", function($resource, $http) {
     },
 
     currentUser: function(cb) {
-      if(user) {
-        cb(user);
-      }
+      // if(user) {
+      //   cb(user);
+      // }
 
       var request = $http({
         method: "GET",
@@ -19,8 +19,8 @@ app.factory("AuthService", ["$resource", "$http", function($resource, $http) {
       });
 
       request.then(function(userData) {
-        user = userData.data;
-        cb(user);
+        // user = userData.data;
+        cb(userData.data);
       });
     }
   }
