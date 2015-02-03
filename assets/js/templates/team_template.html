@@ -1,1 +1,17 @@
-<h1>This is the team template</h1>
+
+  <h1>Cohort: {{team.name}}</h1>
+  <div ng-show="isAdmin">
+    <input type="text" placeholder="Github Username" ng-model="newUser.name">
+    <button ng-click="addUser()">Add new user</button>
+  </div>
+  <br>
+  <div>
+    <ul ng-repeat="user in team.users">
+      <li><a href="/user/{{user.id}}">{{user.name}}</a> <button ng-click="remove(user.id)" ng-show="isAdmin">Remove</button></li>
+    </ul>
+  </div>
+
+  <div ng-show="isAdmin && isCore">
+    <input type="text" placeholder="Team Name" ng-model="newTeam.name">
+    <button ng-click="addTeam()">Add Team</button>
+  </div>
