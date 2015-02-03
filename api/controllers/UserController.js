@@ -130,9 +130,8 @@ module.exports = {
   },
 
   currentuser: function(req, res) {
-
-    if(req.session.authenticated) {
-      res.json(req.session.currentUser);
+    if(req.session.authenticated && req.session.currentUser) {
+      res.redirect('/user/' + req.session.currentUser.id);
     } else {
       res.json(null);
     }

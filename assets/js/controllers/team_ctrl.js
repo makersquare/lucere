@@ -6,12 +6,18 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
   $scope.isAdmin = false;
   $scope.isCore  = teamId === 1;
   var currentUser;
-  AuthService.currentUser(function(user) {
-    currentUser = user;
-    $scope.isAdmin = user.administrating.reduce(function(a, b) {
-      return a || b.id === teamId;
-    }, false);
-  });
+
+  var getAdminStatus = function() {
+    AuthService.currentUser(function(user) {
+      currentUser = user;
+      console.log(user.administrating);
+      $scope.isAdmin = user.administrating.reduce(function(a, b) {
+        return a || b.id === teamId;
+      }, false);
+    });
+  }
+
+  getAdminStatus();
   
   $scope.addUser = function() {
     var userPromise = User.UserFindBy.get({github: $scope.newUser.name});
@@ -37,6 +43,7 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
       users: [currentUser]
     });
     newTeam.$save();
+
   }
 
 }]);
