@@ -141,12 +141,12 @@ module.exports.bootstrap = function(cb) {
     {
       id: 1,
       title: "lesson1",
-      body: "Don't be a dick"
+      body: "#Don't be a dick"
     },
     {
       id: 2,
       title: "lesson2",
-      body: "Brush your teeth three times a day"
+      body: "Brush your teeth **three** _times_ a day"
     },
     {
       id: 3,

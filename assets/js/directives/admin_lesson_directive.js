@@ -23,7 +23,7 @@ app.directive("adminLessonDirective", ["$routeParams", "Lesson", function($route
         };
         editor.render();
         // load queried resource into Editor
-        editor.codemirror.setValue(data.body);
+        editor.codemirror.setValue(data.body || "");
         // trigger code highlighting overlay
         var iconPreview = document.getElementsByClassName("icon-preview")[0];
         angular.element(iconPreview).bind("click", function() {
