@@ -13,11 +13,9 @@
   </div>
   <div class="row">
     <ul ng-repeat="module in library.modules">
-        <li
-            ng-class="{'selected': models.selected === module}"
-            >
-          <a href="/#/team/{{params.teamId}}/library/{{params.libraryId}}/module/{{module.id}}">{{module.name}}</a>
-        </li>
+      <li ng-class="{'selected': models.selected === module}">
+        <a href="/#/admin/library/{{params.libraryId}}/module/{{module.id}}">{{module.name}}</a>
+      </li>
     </ul> 
   </div> 
 </div> 
