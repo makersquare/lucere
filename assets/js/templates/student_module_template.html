@@ -1,12 +1,12 @@
 <div class="container">
-  <div class="row module-row">
-    <div class="col-xs-4">
+  <div class="row">
      <h2>{{module.name}}</h2>
-    </div>
   </div>
-  <div ng-repeat="lesson in module.lessons">
-    <a href="/#/team/{{params.teamId}}/library/{{params.libraryId}}/module/{{params.moduleId}}/lesson/{{lesson.id}}">
-      <li class="lessons-list">{{lesson.title}}</li>
-    </a>
+  <div class="row">
+    <ul ng-repeat="lesson in module.lessons">
+      <li>
+        <a href="/#/team/{{params.teamId}}/library/{{params.libraryId}}/module/{{params.moduleId}}/lesson/{{lesson.id}}">{{lesson.title}}</a>
+      </li>
+    </ul>
   </div>
 </div>

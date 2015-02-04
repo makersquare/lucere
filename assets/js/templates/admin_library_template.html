@@ -1,25 +1,20 @@
 <div class="container">
-  <div class="row">
+  <div class="row row-bottom-margin">
     <h2 class="col-md-12">Library View - SFC3</h2>
   </div>
 
-  <div class="row">
-    <div class="col-md-4">
+  <div class="row row-bottom-margin">
+    <div class="col-xs-4">
       <input type="text" placeholder="New Module" class="form-control" ng-model="moduleName.name">
     </div>
-    <div class="col-md-4">
-      <input type="submit" value="Create Module" class="btn btn-success form-control" ng-click="createModule()"> 
+    <div class="col-xs-4">
+      <input type="submit" value="&plus; Create Module" class="btn btn-success" ng-click="createModule()"> 
     </div>
   </div>
   <div class="row">
-    <ul dnd-list="library.modules" class="col-md-3">
-        <li ng-repeat="module in library.modules"
-            dnd-draggable="module"
-            dnd-moved="module.splice($index,1)"
-            dnd-effect-allowed="move"
-            dnd-selected="models.selected = module"
+    <ul ng-repeat="module in library.modules">
+        <li
             ng-class="{'selected': models.selected === module}"
-            class="form-control"
             >
           <a href="/#/team/{{params.teamId}}/library/{{params.libraryId}}/module/{{module.id}}">{{module.name}}</a>
         </li>
