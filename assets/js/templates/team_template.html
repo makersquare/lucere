@@ -1,4 +1,3 @@
-
   <h1>Cohort: {{team.name}}</h1>
   <div ng-show="isAdmin">
     <input type="text" placeholder="Github Username" ng-model="newUser.name">
@@ -7,7 +6,7 @@
   <br>
   <div>
     <ul ng-repeat="user in team.users">
-      <li><a href="/user/{{user.id}}">{{user.name}}</a> <button ng-click="remove(user.id)" ng-show="isAdmin">Remove</button></li>
+      <li><a href="/#/user/{{user.id}}">{{user.name}}</a> <button ng-click="remove(user.id)" ng-show="isAdmin">Remove</button></li>
     </ul>
   </div>
 
