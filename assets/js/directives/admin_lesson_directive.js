@@ -1,6 +1,6 @@
 app.directive("adminLessonDirective", ["$routeParams", "Lesson", function($routeParams, Lesson) {
   return {
-    templateUrl: "/js/templates/admin_lesson_template.html",
+    templateUrl: "/js/templates/directives/admin_lesson_template.html",
     link: function(scope, elem, attr) {
       // query database for lesson based on route params
       Lesson.get({id: $routeParams.lessonId}, function(data) {
@@ -13,10 +13,8 @@ app.directive("adminLessonDirective", ["$routeParams", "Lesson", function($route
           action: function() {
             var content = editor.codemirror.getValue();
             data.body = content;
-            data.$update(function(test) {
-              // confirm successul update
-            });
-          }, 
+            data.$update();
+          },
           className: "glyphicon glyphicon-floppy-disk"
         };
         editor.render();

@@ -1,6 +1,6 @@
 app.directive("adminLibraryDirective", ["Library", "$route", "Module", function(Library, $route, Module) {
   return {
-    templateUrl: "/js/templates/admin_library_template.html",
+    templateUrl: "/js/templates/directives/admin_library_template.html",
     link: function(scope, attr, elem) {
       scope.params = $route.current.params;
       var id = scope.params.libraryId;
@@ -14,8 +14,7 @@ app.directive("adminLibraryDirective", ["Library", "$route", "Module", function(
             scope.moduleName = "";
           });
         });
-      };
-      
+      }; 
     }
-  }
+  };
 }]);

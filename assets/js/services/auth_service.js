@@ -22,5 +22,5 @@ app.factory("AuthService", ["$resource", "$http", function($resource, $http) {
         cb(user);
       });
     }
-  }
+  };
 }]);
