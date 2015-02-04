@@ -4,16 +4,18 @@
      <h2>Module View</h2>
     </div>
     <div class="col-xs-3 module-input-top-margin">
-      <input type="text" class="form-control" ng-model="module.name">
+      <form name="moduleNameForm" novalidate>
+        <input type="text" class="form-control" ng-model="module.name" required>
+      </form>
     </div>
   </div>
   <div class="row row-bottom-margin">
-    <form>
+    <form name="addLessonForm" ng-submit="createLesson(newLessonTitle)" novalidate>
       <div class="col-xs-4">
-        <input type="text" placeholder="New Lesson" class="form-control" ng-model="newLessonTitle">
+        <input type="text" placeholder="New Lesson" class="form-control" ng-model="newLessonTitle" required>
       </div>
       <div class="col-xs-4">
-        <input type="submit" value="&plus; Create Lesson For Module" class="btn btn-success" ng-click="createLesson(newLessonTitle)">
+        <input type="submit" value="&plus; Create Lesson For Module" class="btn btn-success" ng-disabled="addLessonForm.$invalid">
       </div>
     </form>
   </div>
@@ -24,6 +26,6 @@
       </a>
     </ul>
   </div>
-  <button class="btn" ng-class="{'btn-success' : currentName !== module.name}" ng-disabled="checkName(module.name)" ng-click="updateName()">Save Changes</button>
+  <button class="btn" ng-class="{'btn-success' : currentName !== module.name}" ng-disabled="checkName(module.name) || moduleNameForm.$invalid" ng-click="updateName()">Save Changes</button>
 </div>
 

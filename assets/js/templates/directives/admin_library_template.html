@@ -4,12 +4,14 @@
   </div>
 
   <div class="row row-bottom-margin">
-    <div class="col-xs-4">
-      <input type="text" placeholder="New Module" class="form-control" ng-model="moduleName.name">
-    </div>
-    <div class="col-xs-4">
-      <input type="submit" value="&plus; Create Module" class="btn btn-success" ng-click="createModule()"> 
-    </div>
+    <form name="addModuleForm" ng-submit="createModule()" novalidate>
+      <div class="col-xs-4">
+        <input type="text" placeholder="New Module" class="form-control" ng-model="moduleName.name" required>
+      </div>
+      <div class="col-xs-4">
+        <input type="submit" value="&plus; Create Module" class="btn btn-success" ng-disabled="addModuleForm.$invalid"> 
+      </div>
+    </form>
   </div>
   <div class="row">
     <ul ng-repeat="module in library.modules">
