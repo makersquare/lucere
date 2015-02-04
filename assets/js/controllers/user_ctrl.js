@@ -1,51 +1,61 @@
-app.controller("userCtrl", ["$scope", "$routeParams", "User", "AuthService", function($scope, $routeParams, User, AuthService){
+app.controller("userCtrl", ["$scope", "$routeParams", "User", "AuthService", function($scope, $routeParams, User, AuthService) {
   var userId  = parseInt($routeParams.userId);
-  $scope.user = User.User.get({id: userId});
-  $scope.isOwn = false;
-  var currentUser;
-  AuthService.currentUser(function(user) {
-    $scope.isOwn = userId === user.id;
+  var userRecord = User.User.get({id: userId});
+  $scope.userForm = {name: "", email: "", github: "", twitter: ""};
+  $scope.userPar  = {name: "", email: "", github: "", twitter: ""};
+  userRecord.$promise.then(function(user) {
+    setForm();
+    setUserPar();
   });
 
-  $scope.update = function() {
-    var $elem = angular.element("#user-profile");
-    var $elems = $elem.children("input")
+  $scope.isOwn = false;
+  $scope.showForm = false;
+  var currentUser;
+  AuthService.currentUser(function(user) {
+    $scope.isOwn = (userId === user.id);
+  });
 
-    $scope.user.name = angular.element($elems[0]).val();
-    $scope.user.email = angular.element($elems[1]).val();
-    $scope.user.twitter = angular.element($elems[3]).val();
-    $scope.user.$update();
-    pageView();
-  }
-
-   var pageView = function() {
-    var $elem = angular.element("#user-profile");
-    $elem.children().remove();
-    $elem.append("<p>"+ $scope.user.name + "</p>");
-    $elem.append("<p>" + $scope.user.email + "</p>");
-    $elem.append("<p>" + $scope.user.github + "</p>");
-    $elem.append("<p>" + $scope.user.twitter + "<p>");
-    $elem.append("<button>Edit</button>")
-    $elem.find("button").on("click", function() {
-      $scope.editUser();
+  var setValues = function(toBeSet, getValsFrom) {
+    var keys = Object.keys(getValsFrom);
+    keys.forEach(function(attr) {
+      if(toBeSet[attr] != undefined) {
+        toBeSet[attr] = getValsFrom[attr];
+      }
     });
-  }
+  };
+
+  // Fill form with user details from db
+  var setForm = function() {
+    setValues($scope.userForm, userRecord);
+  };
+
+  // Set user record values to match submitted form values
+  var setUserRecord = function() {
+    setValues(userRecord, $scope.userForm);
+  };
+
+  // Set paragraph values to match submitted form values
+  var setUserPar = function() {
+    setValues($scope.userPar, $scope.userForm);
+  };
+
+  $scope.update = function() {
+    $scope.showForm = false;
+    
+    // Check to make sure that user is updating own profile
+    if($scope.isOwn) {
+      setUserRecord();
+      setUserPar();
+      userRecord.$update();
+    }
+  };
 
   $scope.editUser = function() {
-    var $elem = angular.element("#user-profile");
-    $elem.children().remove();
-    $elem.append("<input type='text' value='"+ $scope.user.name + "'><br>");
-    $elem.append("<input type='text' value='" + $scope.user.email + "'><br>");
-    $elem.append("<input type='text' disabled value='" + $scope.user.github + "'><br>");
-    $elem.append("<input type='text' value='" + $scope.user.twitter + "'><br>");
-    $elem.append("<button class='cancel'>Cancel</button>")
-    $elem.append("<button class='submit'>Submit</button>")
-    $elem.find(".submit").on("click", function() {
-      $scope.update();
-    });
-    $elem.find(".cancel").on("click", function() {
-      pageView();
-    });
-  }
+    $scope.showForm = true;
+  };
 
+  $scope.cancel = function() {
+    $scope.showForm = false;
+    setForm();
+  };
 }]);
