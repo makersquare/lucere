@@ -73,7 +73,7 @@ var checkUsers = function(req, res, token) {
         if(data.length == 1) {
           req.session.authenticated = true;
           req.session.currentUser = data[0];
-          res.send("Authentication finished");
+          res.redirect("/#/user/" + req.session.currentUser.id);
         } else {
           req.session.authenticated = false;
           req.flash("errorMessage", ghUserName + " is not a user.");
