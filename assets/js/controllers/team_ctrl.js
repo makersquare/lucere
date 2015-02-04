@@ -18,19 +18,50 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
 
   getAdminStatus();
   
-  $scope.addUser = function() {
-    var userName = $scope.newUser.name;
+  // Gets user from server
+  // executes successCb or failureCb depending on server response
+  var getUser = function(userName, successCb, failureCb) {
     var userPromise = User.UserFindBy.get({github: userName});
-    $scope.newUser.name = " ";
     userPromise.$promise.then(
       function(user) {
-        $scope.team.users.push(user);
-        $scope.team.$update();
+        if(successCb) {
+          successCb(user);
+        }
       }, function(response) {
-        alert(userName + " is not a user yet.\nWe also don't have a page for this yet.")
+        if(failureCb) {
+          failureCb(response);
+        }
       }
     );
+  }
+
+  $scope.addUser = function() {
+    var _this = this;
+    var userName = $scope.newUser.name;
+    var userFound = function(user) {
+      $scope.team.users.push(user);
+      $scope.team.$update();
+    };
+    var userNotFound = function(response) {
+      alert(userName + " is not a user yet.\nGo to /admin/user/create || /user/create.")
+    };
+    getUser(userName, userFound, userNotFound);
+    $scope.newUser.name = "";
   };
+
+  $scope.addAdmin = function() {
+    var userName = $scope.newAdmin.name;
+    var userFound = function(user) {
+      $scope.team.users.push(user); // by default, add admin to team users collection
+      $scope.team.admins.push(user);
+      $scope.team.$update();
+    };
+    var userNotFound = function(response) {
+      alert(userName + " is not a user yet.\nGo to /admin/user/create || /user/create.")
+    };
+    getUser(userName, userFound, userNotFound);
+    $scope.newAdmin.name = "";
+  }
 
   $scope.remove = function(userId) {
     $scope.team.users = $scope.team.users.filter(function(v) {
@@ -51,5 +82,4 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
     });
     newTeam.$save();
   }
-
 }]);
