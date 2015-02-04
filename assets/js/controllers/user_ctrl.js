@@ -15,7 +15,11 @@ app.controller("userCtrl", ["$scope", "$routeParams", "User", "AuthService", fun
     $scope.user.email = angular.element($elems[1]).val();
     $scope.user.twitter = angular.element($elems[3]).val();
     $scope.user.$update();
+    pageView();
+  }
 
+   var pageView = function() {
+    var $elem = angular.element("#user-profile");
     $elem.children().remove();
     $elem.append("<p>"+ $scope.user.name + "</p>");
     $elem.append("<p>" + $scope.user.email + "</p>");
@@ -34,9 +38,13 @@ app.controller("userCtrl", ["$scope", "$routeParams", "User", "AuthService", fun
     $elem.append("<input type='text' value='" + $scope.user.email + "'><br>");
     $elem.append("<input type='text' disabled value='" + $scope.user.github + "'><br>");
     $elem.append("<input type='text' value='" + $scope.user.twitter + "'><br>");
-    $elem.append("<button>Submit</button>")
-    $elem.find("button").on("click", function() {
+    $elem.append("<button class='cancel'>Cancel</button>")
+    $elem.append("<button class='submit'>Submit</button>")
+    $elem.find(".submit").on("click", function() {
       $scope.update();
+    });
+    $elem.find(".cancel").on("click", function() {
+      pageView();
     });
   }
 
