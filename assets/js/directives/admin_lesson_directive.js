@@ -4,7 +4,6 @@ app.directive("adminLessonDirective", ["$routeParams", "Lesson", function($route
     link: function(scope, elem, attr) {
       // query database for lesson based on route params
       Lesson.get({id: $routeParams.lessonId}, function(data) {
-        console.log(data);
         // instantiate new instance of Editor
         var editor = new Editor();
         // Append save function to toolbar via floppy icon
@@ -16,7 +15,6 @@ app.directive("adminLessonDirective", ["$routeParams", "Lesson", function($route
             data.body = content;
             data.$update(function(test) {
               // confirm successul update
-              console.log("test")
             });
           }, 
           className: "glyphicon glyphicon-floppy-disk"
