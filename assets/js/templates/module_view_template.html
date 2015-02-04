@@ -22,6 +22,21 @@
       <li class="lessons-list">{{lesson.title}}</li>
     </a>
   </div>
-  <button class="btn module-save-button" ng-class="{'btn-success' : currentName !== module.name}" ng-disabled="checkName(module.name)" ng-click="updateName()">Save Changes</button>
+  <button class="btn module-save-button" ng-class="{'btn-success' : (currentName !== module.name || !inOrder)}" ng-disabled="checkName(module.name)" ng-click="updateModule()">Save Changes</button>
 </div>
 
+<ul dnd-list="models.lists">
+  <!-- The dnd-draggable directive makes an element draggable and will
+       transfer the object that was assigned to it. If an element was
+       dragged away, you have to remove it from the original list
+       yourself using the dnd-moved attribute -->
+  <li ng-repeat="lesson in models.lists"
+    dnd-draggable="lesson"
+    dnd-moved="models.lists.splice($index, 1)"
+    dnd-effect-allowed="move"
+    dnd-selected="models.selected = lesson"
+    ng-class="{'selected': models.selected === lesson}"
+    >
+    <a href="">{{lesson.title}}</a>
+  </li>
+</ul>

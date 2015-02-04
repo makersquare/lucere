@@ -17,6 +17,7 @@ module.exports = {
       via: "module"
     },
     library: {
+      index: true,
       model: "library"
     }
   }
