@@ -1,7 +1,19 @@
-<div id="user-profile">
-  <p>{{user.name}}</p>
-  <p>{{user.email}}</p>
-  <p>{{user.github}}</p>
-  <p>{{user.twitter}}</p>
-  <button ng-show="isOwn" ng-click="editUser()">Edit</button>
+<div>
+  <div ng-show="!showForm" class="show-static-profile">
+    <p>{{ userPar.name }}</p>
+    <p>{{ userPar.email }}</p>
+    <p>{{ userPar.github }}</p>
+    <p>{{ userPar.twitter }}</p>
+    <button ng-show="isOwn" ng-click="editUser()">Edit</button>
+  </div>
+
+  <form ng-show="isOwn && showForm" name="editProfileForm" ng-submit="update()" novalidate>
+    <input type="text" ng-model="userForm.name" required><br>
+    <input type="email" ng-model="userForm.email" required><br>
+    <input type="text" ng-model="userForm.github" required disabled ><br>
+    <input type="text" ng-model="userForm.twitter"><br>
+    <button type="submit" ng-disabled="editProfileForm.$invalid">Submit</button>
+  </form>
+  <button ng-show="isOwn && showForm" ng-click="cancel()">Cancel</button>
+  
 </div>
