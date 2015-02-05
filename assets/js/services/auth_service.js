@@ -1,5 +1,11 @@
-app.factory("AuthService", ["$http", function($http) {
+app.factory("AuthService", ["$http", "$location", function($http, $location) {
   var user = null;
+
+  var logout = function() {
+    user = null;
+    $location.path("/login");
+    $http.get("/logout");
+  }
 
   var login = function(cb) {
     var request = $http({
@@ -14,13 +20,13 @@ app.factory("AuthService", ["$http", function($http) {
       }
     })
     .error(function() {
-      return cb(null)
+      return cb(null);
     });
-
   };
 
   return {
     login: login,
+    logout: logout,
 
     currentUser: function(cb) {
       if(user) {
