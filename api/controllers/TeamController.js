@@ -5,7 +5,16 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-module.exports = {
-	
-};
+var Core = require("../services/CoreLibrary.js");
 
+module.exports = {
+  create: function(req, res) {
+    var team = req.params.all();
+
+    Team.create(team).then(function(newTeam) {
+      Core.clone(newTeam, function(lib) {
+        res.send({"teamId": newTeam.id});
+      });
+    });
+  }
+};
