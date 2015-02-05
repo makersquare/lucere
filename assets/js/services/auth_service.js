@@ -1,26 +1,37 @@
-app.factory("AuthService", ["$resource", "$http", function($resource, $http) {
+app.factory("AuthService", ["$http", function($http) {
   var user = null;
 
+  var login = function(cb) {
+    var request = $http({
+      method: "GET",
+      url: "/user/currentuser"
+    });
+
+    request.success(function(userData) {
+      user = userData;
+      if(cb) {
+        return cb(user);
+      }
+    })
+    .error(function() {
+      return cb(null)
+    });
+
+  };
+
   return {
-    logout: function() {
-      user = null;
-      // call logout on server
-    },
+    login: login,
 
     currentUser: function(cb) {
       if(user) {
-        cb(user);
+        return cb(user);
       }
 
-      var request = $http({
-        method: "GET",
-        url: "/user/currentuser",
-      });
+      login(cb);
+    },
 
-      request.then(function(userData) {
-        user = userData.data;
-        cb(user);
-      });
-    }
+    loggedIn: function() {
+      return (user ? true : false);
+    } 
   };
 }]);
