@@ -5,7 +5,7 @@
     </div>
     <div class="col-lg-9">
       <ul class="nav navbar-nav">
-        <li><button class="navbar-btn" ng-click="teamClick()">View Team</button></li>
+        <li><a ng-href="#/team/{{currentUser.teams[0].id}}">View Team</a></li>
       </ul>
       <!-- TODO change to logo -->
       <ul class="nav navbar-nav navbar-right">
@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav navbar-right">
         <a class="navbar-brand" href="#"><b>lucere</b></a>
         <li><a ng-href="#/user/{{currentUser.id}}">{{currentUser.name}}</a></li>
-        <li><button class="navbar-btn" ng-click="logout()">Logout</button></li>
+        <li><a href="/logout">Logout</a></li>
       </ul>
     </div>
   </div><!-- /.container-fluid -->
