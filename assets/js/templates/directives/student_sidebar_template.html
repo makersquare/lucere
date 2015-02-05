@@ -1,0 +1,10 @@
+<div class="panel">
+  <div ng-repeat="module in modules">
+    <h4><strong>{{module.name}}</strong></h4>
+    <ul>
+      <li ng-repeat="lesson in module.lessons">
+        <a href="/#/library/{{module.library.id}}/module/{{module.id}}/lesson/{{lesson.id}}">{{lesson.title}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
