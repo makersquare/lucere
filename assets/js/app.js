@@ -60,4 +60,30 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
         });    
       }
     });
+  }])
+  .run(["$rootScope", "$location", "AuthService", "$route", function($rootScope, $location, AuthService, $route) {
+    $rootScope.$on("$locationChangeStart", function(event, next, current) {
+      AuthService.currentUser(function(user) {
+        // Check if the current user is trying to visit an admin route
+        var isAdminRoute = /(admin\/)/.test(next);
+        var paramArr = next.split("/");
+        var hasPermission;
+
+        if (isAdminRoute) {
+          var libId = paramArr[6];
+          hasPermission = user.administrating.some(function(adminLib) {
+            return adminLib.id === parseInt(libId);
+          });
+        } else {
+          var libId = paramArr[5];
+          hasPermission = user.teams.some(function(teamLib) {
+            return teamLib.id === parseInt(libId);
+          });
+        }
+
+        if (!hasPermission) {
+          event.preventDefault();
+        }
+      });
+    });
   }]);
