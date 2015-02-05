@@ -66,7 +66,7 @@ module.exports.connections = {
   },
   development: {
     adapter: 'sails-mongo',
-    host: process.env.MONGO_URL,
+    host: process.env.MONGO_HOST,
     port: process.env.MONGO_PORT,
     user: process.env.MONGO_USER,
     database: process.env.MONGO_DB,
