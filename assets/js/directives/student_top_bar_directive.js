@@ -1,6 +1,6 @@
-app.directive("topBarDirective", ["$location", "AuthService", function($location, AuthService) {
+app.directive("studentTopBarDirective", ["$location", "AuthService", function($location, AuthService) {
   return {
-    templateUrl: "/js/templates/directives/top_bar_template.html",
+    templateUrl: "/js/templates/directives/student_top_bar_template.html",
     link: function(scope, attr, elem) {
       AuthService.currentUser(function(user) {
         scope.currentUser = user;
