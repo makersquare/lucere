@@ -63,4 +63,42 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
         });    
       }
     });
+  }])
+  .run(["$rootScope", "$location", "AuthService", "$route", "$routeParams", function($rootScope, $location, AuthService, $route, $routeParams) {
+    $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
+      var routeParams = $route.current.params;
+      var libId = routeParams.libraryId;
+
+      var isAdminRoute = /(admin\/)/.test($location.path());
+
+      // If on a library route, check to see if user should have access
+      if(libId) {
+        AuthService.currentUser(function(user) {
+          if(user && user.teams) {
+            var allowAccess = false;
+
+            // Users accessing admin route must be admins
+            if(isAdminRoute) {
+              user.teams.forEach(function(team) {
+                user.administrating.forEach(function(admining) {
+                  if(team.library && team.library == libId && admining.id == team.id) {
+                    allowAccess = true;
+                  }
+                })
+              });
+            } else {
+              user.teams.forEach(function(team) {
+                if(team.library && team.library == libId) {
+                  allowAccess = true;
+                }
+              });
+            }
+            if(!allowAccess) {
+              $location.path("/user/" + user.id);
+            }
+          }
+        });
+      }
+
+    });
   }]);
