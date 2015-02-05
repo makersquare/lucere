@@ -48,14 +48,17 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
         controller: "lessonCtrl",
         templateUrl: "/js/templates/views/student_lesson.html"
       })
+      .when("/error", {
+        templateUrl: "/js/templates/views/no_user_error.html"
+      })
       .otherwise({redirectTo: "/login"});
     }])
   .run(["$rootScope", "$location", "AuthService", function($rootScope, $location, AuthService) {
     $rootScope.$on("$routeChangeStart", function(e) {
       if(!AuthService.loggedIn()) {
         AuthService.login(function(user) {
-          if(!user) {
-            $location.path("/login");
+          if(user.teams.length === 0 && user.administrating.length === 0) {
+            $location.path("/user/"+user.id);
           }
         });    
       }
