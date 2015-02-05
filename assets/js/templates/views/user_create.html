@@ -26,4 +26,17 @@
       </form>
     </div>
   </div>
+  <br><br>
+  <div class="row row-bottom-margin">
+    <div class="col-xs-4">
+      <ul ng-repeat="user in users">
+        <li>
+          <a ng-href="/#/user/{{user.id}}">{{user.name}}</a> 
+          <button type="button" class="btn btn-danger btn-xs" ng-click="remove(user.id)">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
