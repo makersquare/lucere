@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="col-lg-3">
+      <!-- location for search field and button -->
+    </div>
+    <div class="col-lg-9">
+      <ul class="nav navbar-nav">
+        <li><button class="navbar-btn" ng-click="teamClick()">View Team</button></li>
+      </ul>
+      <!-- TODO change to logo -->
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <a class="navbar-brand" href="#"><b>lucere</b></a>
+        <li><a ng-href="#/user/{{currentUser.id}}">{{currentUser.name}}</a></li>
+        <li><button class="navbar-btn" ng-click="logout()">Logout</button></li>
+      </ul>
+    </div>
+  </div><!-- /.container-fluid -->
+</nav>

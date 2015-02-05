@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Lucere">
   <head>
     <title>New Sails App</title>
 
@@ -30,12 +30,22 @@
 
     <!--STYLES-->
     <!--STYLES END-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/zenburn.min.css">
+
   </head>
 
   <body>
-    <%- body %>
-
-
+  <admin-top-nav-directive></admin-top-nav-directive>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-9 main">
+        <ng-view></ng-view>
+      </div>
+    </div>
+  </div>
 
     <!--
         Client-side Templates
@@ -59,10 +69,13 @@
     -->
 
     <!--TEMPLATES-->
+    
     <!--TEMPLATES END-->
 
 
     <!--
+
+
 
       Client-side Javascript
       ========================
@@ -87,5 +100,9 @@
 
     <!--SCRIPTS-->
     <!--SCRIPTS END-->
+    <script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
+    <script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+
   </body>
 </html>
