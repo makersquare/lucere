@@ -1,9 +1,9 @@
 <div class="panel">
   <div ng-repeat="module in modules">
-    <h4><strong>{{module.name}}</strong></h4>
+    <h4><strong><a ng-href="/#/admin/library/{{module.library.id}}/module/{{module.id}}">{{module.name}}</a></strong></h4>
     <ul>
       <li ng-repeat="lesson in module.lessons">
-        <a href="/#/admin/library/{{module.library.id}}/module/{{module.id}}/lesson/{{lesson.id}}">{{lesson.title}}</a>
+        <a ng-href="/#/admin/library/{{module.library.id}}/module/{{module.id}}/lesson/{{lesson.id}}">{{lesson.title}}</a>
       </li>
     </ul>
   </div>
