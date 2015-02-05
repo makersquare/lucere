@@ -20,6 +20,11 @@ app.directive("adminTopNavDirective", ["$location", "$http", "$route", "AuthServ
         }
       });
 
+      scope.getViewAs = function() {
+        var id = $route.current.params.libraryId || $route.current.params.teamId;
+        $location.path("/library/"+id);
+      }
+
       scope.logout = function() {
         $http.get("/logout");
         scope.currentUser = "";
