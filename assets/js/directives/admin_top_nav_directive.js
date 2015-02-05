@@ -5,50 +5,43 @@ app.directive("adminTopNavDirective", ["$location", "$http", "$route", "AuthServ
       AuthService.currentUser(function(user) {
         scope.currentUser = user;
         var teams = user.administrating;
-        var teamId = $route.current.params.teamId;
-        var libraryId = parseInt($route.current.params.libraryId);
+        var id = parseInt($route.current.params.libraryId) || parseInt($route.current.params.teamId);
 
         for (var i = 0; i < teams.length; i++) {
-          console.log(teams[i]);
-          if (libraryId === 1) {
+          if (id === 1) {
             scope.libraryTag = "Core";
-            console.log("core")
             scope.teamList = teams;
-            console.log(scope.libraryTag);
-          } else if(teams[i].id === teamId) {
+          } else if(teams[i].id === id) {
             scope.libraryTag = teams[i].name;
+            teams.splice(i,1);
+            teams.push({id:1,name:"Core"});
             scope.teamList = teams;
-            console.log(teams[i].name)
           }
-
         }
       });
 
       scope.logout = function() {
         $http.get("/logout");
+        scope.currentUser = "";
         $location.path("/login");
       };     
 
-      // scope.libraryTag = $route.current.params.teamId == 1 ? "Core" : "SFC3";
-
       scope.getLibrary = function() {
-        var teamId = $route.current.params.teamId;
-        $location.path("/team/"+teamId+"/library/"+teamId);
+        var teamId = $route.current.params.teamId || $route.current.params.libraryId;
+        $location.path("/admin/library/"+teamId);
       };
 
       scope.getTeam = function() {
-        var teamId = $route.current.params.teamId;
-        $location.path("/team/"+teamId)
+        var libraryId = $route.current.params.libraryId || $route.current.params.teamId;
+        $location.path("/admin/team/"+libraryId);
       }
 
       scope.changeLibrary = function(id) {
         var libraryId = $route.current.params.libraryId;
         if (libraryId === 1) {
-          $location.path("/team/"+id+"/library/"+1);
-        } else if(libraryId) {
-          $location.path("/team/"+id+"/library/"+1);
+          $location.path("/admin/library/"+id);
         } else {
-          $location.path("/team/"+id);
+          $location.path("/admin/team/"+id)
         }
         
       };
