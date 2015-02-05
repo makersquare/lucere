@@ -118,13 +118,30 @@ module.exports.bootstrap = function(cb) {
       teams: [],
       administrating: [],
       id: 12
+    },
+    {
+      name: "Shehzan Devani",
+      email: "shehzan@makersquare.com",
+      github: "sdevani",
+      twitter: "@powerpuffgirlfan",
+      teams: [],
+      administrating: [],
+      id: 13
     }
   ];
 
-  var library = {
-    id: 1, 
-    name: "library1"
-  };
+  var libraries = [
+    {
+      id: 1,
+      name: "library1",
+      team: 1
+    },
+    {
+      id: 2,
+      name: "library2",
+      team: 2
+    }
+  ];
 
   var modules = [
     {
@@ -158,27 +175,29 @@ module.exports.bootstrap = function(cb) {
   var teams = [
     {
       id: 1,
-      name: "Superteam",
-      users: [1,2,3,7],
-      library: [],
-      admins: [2,3,8]
-
+      name: "Core",
+      users: [1,2,3,7,8,9],
+      library: [1],
+      admins: [1,2,3,7,8,9]
     },
     {
       id: 2,
-      name: "Teamsters",
-      users: [4,5,6,7],
-      library: [],
-      admins: [2,7]
+      name: "Team 2",
+      users: [4,5,6,10,11,12,13],
+      library: [2],
+      admins: [4,5,6,10,11,12,13]
     }
   ];
 
   User.create(users).exec(function(err, user){
-    Library.create(library).exec(function(err, library) {
+    Library.create(libraries).exec(function(err, lib) {
       Module.create(modules).exec(function(err, modules) {
-        library.modules.add(1);
-        library.modules.add(2);
-        library.save();
+        lib[0].modules.add(1);
+        lib[0].modules.add(2);
+        lib[0].save();
+
+        lib[1].modules.add(1);
+        lib[1].save();
         Lesson.create(lessons).exec(function(err, lessons) {
           modules[0].lessons.add(1);
           modules[0].lessons.add(2);
