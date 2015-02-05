@@ -123,7 +123,8 @@ module.exports.bootstrap = function(cb) {
 
   var library = {
     id: 1, 
-    name: "library1"
+    name: "library1",
+    team: 1
   };
 
   var modules = [
@@ -160,7 +161,7 @@ module.exports.bootstrap = function(cb) {
       id: 1,
       name: "Superteam",
       users: [1,2,3,7],
-      library: [],
+      library: [1],
       admins: [2,3,8]
 
     },

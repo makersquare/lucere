@@ -61,29 +61,26 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
       }
     });
   }])
-  .run(["$rootScope", "$location", "AuthService", "$route", function($rootScope, $location, AuthService, $route) {
-    $rootScope.$on("$locationChangeStart", function(event, next, current) {
-      AuthService.currentUser(function(user) {
-        // Check if the current user is trying to visit an admin route
-        var isAdminRoute = /(admin\/)/.test(next);
-        var paramArr = next.split("/");
-        var hasPermission;
+  .run(["$rootScope", "$location", "AuthService", "$route", "$routeParams", function($rootScope, $location, AuthService, $route, $routeParams) {
+    $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
+      var routeParams = $route.current.params;
+      var libId = routeParams.libraryId;
 
-        if (isAdminRoute) {
-          var libId = paramArr[6];
-          hasPermission = user.administrating.some(function(adminLib) {
-            return adminLib.id === parseInt(libId);
-          });
-        } else {
-          var libId = paramArr[5];
-          hasPermission = user.teams.some(function(teamLib) {
-            return teamLib.id === parseInt(libId);
-          });
-        }
-
-        if (!hasPermission) {
-          event.preventDefault();
-        }
-      });
+      // If on a library route, check to see if user should have access
+      if(libId) {
+        AuthService.currentUser(function(user) {
+          if(user && user.teams) {
+            var allowAccess = false;
+            user.teams.forEach(function(team) {
+              if(team.library && team.library == libId) {
+                allowAccess = true;
+              }
+            });
+            if(!allowAccess) {
+              $location.path("/user/" + user.id);
+            }
+          }
+        });
+      }
     });
   }]);
