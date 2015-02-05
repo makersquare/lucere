@@ -17,6 +17,16 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
   }
 
   getAdminStatus();
+
+  $scope.adminsThis = function(thisUserId) {
+    var admining = false;
+    $scope.team.admins.forEach(function(admin) {
+      if(admin.id == thisUserId) {
+        admining = true;
+      }
+    });
+    return admining;
+  }
   
   // Gets user from server
   // executes successCb or failureCb depending on server response
