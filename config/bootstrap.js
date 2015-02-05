@@ -151,6 +151,10 @@ module.exports.bootstrap = function(cb) {
     {
       id: 2,
       name: "module2"
+    },
+    {
+      id: 3,
+      name: "module3"
     }
   ];
 
@@ -169,6 +173,11 @@ module.exports.bootstrap = function(cb) {
       id: 3,
       title: "lesson3",
       body: "Don't trust anyone"
+    },
+    {
+      id: 4,
+      title: "lesson4",
+      body: "snoop d o double g"
     }
   ];
 
@@ -196,7 +205,7 @@ module.exports.bootstrap = function(cb) {
         lib[0].modules.add(2);
         lib[0].save();
 
-        lib[1].modules.add(1);
+        lib[1].modules.add(3);
         lib[1].save();
         Lesson.create(lessons).exec(function(err, lessons) {
           modules[0].lessons.add(1);
@@ -205,6 +214,9 @@ module.exports.bootstrap = function(cb) {
 
           modules[1].lessons.add(3);
           modules[1].save();
+
+          modules[2].lessons.add(4);
+          modules[2].save();
           Team.create(teams).exec(function(err, team) {
             cb();
           });
