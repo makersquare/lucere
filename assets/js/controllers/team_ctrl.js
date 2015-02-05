@@ -74,7 +74,7 @@ app.controller("teamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
 
   $scope.addTeam = function() {
     var newTeamName = $scope.newTeam.name;
-    $scope.newTeam.name = " ";
+    $scope.newTeam.name = "";
     var newTeam = new Team({
       name: newTeamName,
       admins: [currentUser],
