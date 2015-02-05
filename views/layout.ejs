@@ -36,9 +36,30 @@
   </head>
 
   <body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div ng-controller="userViewCtrl">
+          <div ng-show="admin">
+            <admin-top-nav-directive></admin-top-nav-directive>
+          </div>
+          <div ng-show="!admin">
+            <student-top-bar-directive></student-top-bar-directive>
+          </div>
+        </div>
+      </div>
+    </div>
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
+        <div ng-controller="userViewCtrl">
+          <div ng-show="admin">
+            <admin-sidebar-directive></admin-sidebar-directive>
+          </div>
+          <div ng-show="!admin">
+            <student-sidebar-directive></student-sidebar-directive>
+          </div>
+        </div>
       </div>
       <div class="col-lg-9 main">
         <ng-view></ng-view>
