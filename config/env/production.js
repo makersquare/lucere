@@ -11,7 +11,16 @@
  */
 
 module.exports = {
-
+  connections: {
+    production: {
+      adapter: 'sails-mongo',
+      host: process.env.MONGO_HOST,
+      port: process.env.MONGO_PORT,
+      user: process.env.MONGO_USER,
+      database: process.env.MONGO_DB,
+      password: process.env.MONGO_PW
+    }
+  },
   models: {
     migrate: "safe",
     connection: 'production'
