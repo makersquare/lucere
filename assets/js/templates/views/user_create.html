@@ -1,11 +1,29 @@
-<h1>Create New User</h1>
+<div class="container">
+  <div class="row row-bottom-margin">
+    <div class="col-xs-4">
+      <h2>Create New User</h2>
+    </div>
+  </div>
+  <div class="row row=bottom-margin">
+    <div class="col-xs-6">
+      <form name="createUserForm" novalidate ng-submit="createUser()">
+        <div class="form-group">
+          <label for="new-user-name">Name:</label> 
+          <input type="text" class="form-control" ng-model="newUser.name" id="new-user-name" required>
+        </div>
 
-<form name="createUserForm" novalidate ng-submit="createUser()">
-  <label for="new-user-name">Name:</label> <input type="text" ng-model="newUser.name" id="new-user-name" required><br>
+        <div class="form-group">
+          <label for="new-user-email">E-mail:</label> 
+          <input type="email" class="form-control" ng-model="newUser.email" id="new-user-email" required>
+        </div>
 
-  <label for="new-user-email">E-mail:</label> <input type="email" ng-model="newUser.email" id="new-user-email" required><br>
+        <div class="form-group">
+          <label for="new-user-github">Github Username:</label>
+          <input type="text" class="form-control" ng-model="newUser.githubName" required>
+        </div>
 
-  <label for="new-user-github">Github Username:</label><input type="text" ng-model="newUser.githubName" required><br><br>
-
-  <button type="submit" id="new-user-github" ng-disabled="createUserForm.$invalid">Create</button>
-</form>
+        <button type="submit" class="btn btn-success" id="new-user-github" ng-disabled="createUserForm.$invalid">Create</button>
+      </form>
+    </div>
+  </div>
+</div>

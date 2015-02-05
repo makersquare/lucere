@@ -1,19 +1,39 @@
-<div>
-  <div ng-show="!showForm" class="show-static-profile">
-    <p>{{ userPar.name }}</p>
-    <p>{{ userPar.email }}</p>
-    <p>{{ userPar.github }}</p>
-    <p>{{ userPar.twitter }}</p>
-    <button ng-show="isOwn" ng-click="editUser()">Edit</button>
+<div class="container">
+  <div class="row row-bottom-margin">
+    <div class="col-xs-4">
+      <h2>Profile</h2>
+    </div>
   </div>
+  <div class="row row-bottom-margin">
+    <div class="col-xs-6">
+      <div ng-show="!showForm" class="show-static-profile">
+        <p><strong>Name:</strong> {{ userPar.name }}</p>
+        <p><strong>Email:</strong> {{ userPar.email }}</p>
+        <p><strong>Github:</strong> {{ userPar.github }}</p>
+        <p><strong>Twitter:</strong> {{ userPar.twitter }}</p>
+        <button class="btn btn-success" ng-show="isOwn" ng-click="editUser()">Edit</button>
+      </div>
 
-  <form ng-show="isOwn && showForm" name="editProfileForm" ng-submit="update()" novalidate>
-    <input type="text" ng-model="userForm.name" required><br>
-    <input type="email" ng-model="userForm.email" required><br>
-    <input type="text" ng-model="userForm.github" required disabled ><br>
-    <input type="text" ng-model="userForm.twitter"><br>
-    <button type="submit" ng-disabled="editProfileForm.$invalid">Submit</button>
-  </form>
-  <button ng-show="isOwn && showForm" ng-click="cancel()">Cancel</button>
-  
+      <form ng-show="isOwn && showForm" name="editProfileForm" ng-submit="update()" novalidate>
+        <div class="form-group">
+          <label for="user-name">Name:</label> 
+          <input type="text" class="form-control" id="user-name" ng-model="userForm.name" required>
+        </div>
+        <div class="form-group">
+          <label for="user-email">Email:</label> 
+          <input type="email" class="form-control" id="user-email" ng-model="userForm.email" required>
+        </div>
+        <div class="form-group">
+          <label for="user-github">Github:</label> 
+          <input type="text" class="form-control" id="user-github" ng-model="userForm.github" required disabled>
+        </div>
+        <div class="form-group">
+          <label for="user-twitter">Twitter:</label> 
+          <input type="text" class="form-control" id="user-twitter" ng-model="userForm.twitter">
+        </div>
+        <button class="btn btn-link" ng-show="isOwn && showForm" ng-click="cancel()">Cancel</button> 
+        <button type="submit" class="btn btn-success" ng-disabled="editProfileForm.$invalid">Update</button>
+      </form>
+    </div>
+  </div>
 </div>

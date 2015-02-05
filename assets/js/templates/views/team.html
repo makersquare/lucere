@@ -1,20 +1,52 @@
-  <h1>Cohort: {{team.name}}</h1>
-  <form name="addUserForm" ng-show="isAdmin" ng-submit="addUser()" novalidate>
-    <input type="text" placeholder="Github Username" ng-model="newUser.name" required>
-    <button type="submit" ng-disabled="addUserForm.$invalid">Add new user</button>
-  </form>
-  <br>
-  <form name="addAdminForm" ng-show="isAdmin" ng-submit="addAdmin()" novalidate>
-    <input type="text" placeholder="Github Username" ng-model="newAdmin.name" required>
-    <button type="submit" ng-disabled="addAdminForm.$invalid">Add New Admin</button>
-  </form>
-  <br>
-  <div>
+<div class="container">
+  <div class="row row-bottom-margin">
+    <div class="col-xs-4">
+      <h2>Cohort: {{team.name}}</h2>
+    </div>
+    <div class="col-xs-4 module-input-top-margin">
+      <form name="addAdminForm" ng-show="isAdmin" ng-submit="addAdmin()" novalidate>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Github Username" ng-model="newAdmin.name" required>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-success" ng-disabled="addAdminForm.$invalid">&plus; Add New Admin</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row row-bottom-margin">
+    <div class="col-xs-4">
+      <form name="addUserForm" ng-show="isAdmin" ng-submit="addUser()" novalidate>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Github Username" ng-model="newUser.name" required>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-success" ng-disabled="addUserForm.$invalid">&plus; Add new user</button>
+          </span>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-4">
+      <form name="addTeamForm" ng-show="isAdmin && isCore"  ng-submit="addTeam()" novalidate>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Team Name" ng-model="newTeam.name" required>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-success" ng-disabled="addTeamForm.$invalid">&plus; Add New Team</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<div class="row row-bottom-margin">
+  <div class="col-xs-4">
     <ul ng-repeat="user in team.users">
-      <li><a href="/#/user/{{user.id}}">{{user.name}}</a> <button ng-click="remove(user.id)" ng-show="isAdmin">Remove</button></li>
+      <li>
+        <a href="/#/user/{{user.id}}">{{user.name}}</a> 
+        <button type="button" class="btn btn-danger btn-xs" ng-click="remove(user.id)" ng-show="isAdmin">
+          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove
+        </button>
+      </li>
     </ul>
   </div>
-  <form name="addTeamForm" ng-show="isAdmin && isCore"  ng-submit="addTeam()" novalidate>
-    <input type="text" placeholder="Team Name" ng-model="newTeam.name" required>
-    <button type="submit" ng-disabled="addTeamForm.$invalid">Add Team</button>
-  </form>
+</div>
