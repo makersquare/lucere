@@ -159,16 +159,17 @@ module.exports.bootstrap = function(cb) {
     {
       id: 1,
       name: "Superteam",
-      users: [1,2,3],
+      users: [1,2,3,7],
       library: [],
       admins: [2,3,8]
+
     },
     {
       id: 2,
       name: "Teamsters",
-      users: [4,5,6],
+      users: [4,5,6,7],
       library: [],
-      admins: [2]
+      admins: [2,7]
     }
   ];
 
