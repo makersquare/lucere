@@ -1,6 +1,6 @@
 app.directive("adminTopNavDirective", ["$location", "$http", "$route", "AuthService", "User", function($location, $http, $route, AuthService, User) {
   return {
-    templateUrl: "/js/templates/admin_top_nav_template.html",
+    templateUrl: "/js/templates/directives/admin_top_nav_template.html",
     link: function(scope, attr, elem) {
       AuthService.currentUser(function(user) {
         scope.currentUser = user;
