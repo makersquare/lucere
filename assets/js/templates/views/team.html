@@ -42,7 +42,7 @@
   <div class="col-xs-4">
     <ul ng-repeat="user in team.users">
       <li>
-        <a href="/#/user/{{user.id}}">{{user.name}}</a> 
+        <a href="/#/user/{{user.id}}">{{user.name}}</a><span ng-show="adminsThis(user.id)"> (admin) </span>
         <button type="button" class="btn btn-danger btn-xs" ng-click="remove(user.id)" ng-show="isAdmin">
           <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove
         </button>
