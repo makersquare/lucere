@@ -73,7 +73,13 @@ var checkUsers = function(req, res, token) {
         if(data.length == 1) {
           req.session.authenticated = true;
           req.session.currentUser = data[0];
-          res.redirect("/#/user/" + req.session.currentUser.id);
+
+          // redirect user to library of the first of their teams if they have a team
+          if(req.session.currentUser.teams[0] && req.session.currentUser.teams[0].library) {
+            res.redirect("/#/library/" + req.session.currentUser.teams[0].library);
+          } else {
+            res.redirect("/#/user/" + req.session.currentUser.id);
+          }
         } else {
           req.session.authenticated = false;
           req.flash("errorMessage", ghUserName + " is not a user.");
@@ -135,7 +141,7 @@ module.exports = {
 
   currentuser: function(req, res) {
     if(req.session.authenticated && req.session.currentUser) {
-      res.redirect('/user/' + req.session.currentUser.id);
+      res.redirect("/user/" + req.session.currentUser.id);
     } else {
       res.json(null);
     }
