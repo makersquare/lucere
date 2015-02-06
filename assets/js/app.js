@@ -5,47 +5,47 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
         templateUrl: "/js/templates/views/login.html"
       })
       .when("/admin/user/create", {
-        controller: "userCreationCtrl",
+        controller: "UserCreationCtrl",
         templateUrl: "/js/templates/views/user_create.html"
       })
       .when("/admin/user/:userId", {
-        controller: "userCtrl",
+        controller: "UserCtrl",
         templateUrl: "/js/templates/views/user_profile.html"
       })
       .when("/admin/team/:teamId", {
-        controller: "teamCtrl",
+        controller: "TeamCtrl",
         templateUrl: "/js/templates/views/team.html"
       })
       .when("/admin/library/:libraryId", {
-        controller: "libraryCtrl",
+        controller: "LibraryCtrl",
         templateUrl: "/js/templates/views/admin_library.html"
       })
       .when("/admin/library/:libraryId/module/:moduleId", {
-        controller: "moduleCtrl",
+        controller: "ModuleCtrl",
         templateUrl: "/js/templates/views/admin_module.html"
       })
       .when("/admin/library/:libraryId/module/:moduleId/lesson/:lessonId", {
-        controller: "lessonCtrl",
+        controller: "LessonCtrl",
         templateUrl: "/js/templates/views/admin_lesson.html"
       })
       .when("/user/:userId", {
-        controller: "userCtrl",
+        controller: "UserCtrl",
         templateUrl: "/js/templates/views/user_profile.html"
       })
       .when("/team/:teamId", {
-        controller: "teamCtrl",
+        controller: "TeamCtrl",
         templateUrl: "/js/templates/views/team.html"
       })
       .when("/library/:libraryId", {
-        controller: "libraryCtrl",
+        controller: "LibraryCtrl",
         templateUrl: "/js/templates/views/student_library.html"
       })
       .when("/library/:libraryId/module/:moduleId", {
-        controller: "moduleCtrl",
+        controller: "ModuleCtrl",
         templateUrl: "/js/templates/views/student_module.html"
       })
       .when("/library/:libraryId/module/:moduleId/lesson/:lessonId", {
-        controller: "lessonCtrl",
+        controller: "LessonCtrl",
         templateUrl: "/js/templates/views/student_lesson.html"
       })
       .when("/error", {

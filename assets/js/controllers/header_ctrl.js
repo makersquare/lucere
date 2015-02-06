@@ -1,3 +1,3 @@
-app.controller("headerCtrl", ["$scope", function($scope){
+app.controller("HeaderCtrl", ["$scope", function($scope){
 
 }]);
