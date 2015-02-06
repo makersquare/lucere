@@ -1,4 +1,5 @@
 app.factory("AuthService", ["$http", "$location", function($http, $location) {
+
   var user = null;
 
   var logout = function() {
