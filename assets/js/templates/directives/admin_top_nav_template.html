@@ -1,23 +1,39 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <a href="" class="dropdown-toggle" ng-attr-data-toggle="{{dropCheck ? 'dropdown' : 'collapse'}}" role="button" aria-expanded="false">{{libraryTag}} <span class="caret" ng-show="dropCheck"></span></a>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-repeat="team in userArr"><a ng-click="changeLibrary(team.id)">{{team.name}}</a></li>
-        </ul>
-      </li>
-      <li><a href="" ng-click="getTeam()">Team</a></li>
-      <li><a href="" ng-click="getLibrary()">Library</a></li>
-      <li><a>View As</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a class="nav-title">lucere</a></li>
-      <li class="nav navbar-nav navbar-right"><a href="" ng-click="logout()" ng-show="currentUser">Log Out</a></li>
-      <li><a href="/#/user/{{currentUser.id}}" ng-show="currentUser">{{currentUser.name}}</a></li>
-    </ul>
-    </div>  
-  </div>
-    
+      
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" ng-attr-data-toggle="{{dropCheck ? 'dropdown' : 'collapse'}}" role="button" aria-expanded="false">{{libraryTag}} <span class="caret" ng-show="dropCheck"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="l in libraries">
+              <a ng-click="getAdminLibrary(l)">LibName</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teams<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="t in teamList">
+              <a ng-click="getAdminTeam(t.id)">{{t.name}}</a>
+            </li>
+          </ul>
+        </li>
+        <li>         
+          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View As<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="">Admin</a></li>
+            <li><a ng-click="">Student</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="nav-title">lucere</a></li>
+        <li class="nav navbar-nav navbar-right"><a href="" ng-click="logout()">Log Out</a></li>
+        <li><a ng-href="#/user/{{currentUser.id}}">{{currentUser.name}}</a></li>
+      </ul>
+
+    </div>  <!-- close div.collapse navbar-collapse -->
+  </div> <!-- close div.container-fluid -->
 </nav>
