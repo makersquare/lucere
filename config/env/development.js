@@ -24,8 +24,7 @@ module.exports = {
   },
   models: {
     migrate: "drop",
-    connection: "development",
-    autoPK: false
+    connection: "development"
   }
 
 };

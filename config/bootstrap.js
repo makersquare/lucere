@@ -10,15 +10,14 @@
  */
 
 module.exports.bootstrap = function(cb) {
-  var users = [
+  var usersData = [
     {
       name: "Mazdak Momen",
       email: "mazdak@wtf.comx",
       github: "mmomen",
       twitter: "@mexicanhatdance",
       teams: [],
-      administrating: [],
-      id: 1
+      administrating: []
     },
     {
       name: "Chris Rhoton",
@@ -26,8 +25,7 @@ module.exports.bootstrap = function(cb) {
       github: "chrisrhoton",
       twitter: "@alldayeveryday",
       teams: [],
-      administrating: [],
-      id: 2
+      administrating: []
     },
     {
       name: "Tessa Kelly",
@@ -35,8 +33,7 @@ module.exports.bootstrap = function(cb) {
       github: "tesk9",
       twitter: "@iReadTheEntireDictionaryTwice",
       teams: [],
-      administrating: [],
-      id: 3
+      administrating: []
     },
     {
       name: "Anastasi Bakolias",
@@ -44,8 +41,7 @@ module.exports.bootstrap = function(cb) {
       github: "spasiu",
       twitter: "@peakinggreek",
       teams: [],
-      administrating: [],
-      id: 4
+      administrating: []
     },
     {
       name: "Sean Gibat",
@@ -53,8 +49,7 @@ module.exports.bootstrap = function(cb) {
       github: "seangibat",
       twitter: "@prettyginger",
       teams: [],
-      administrating: [],
-      id: 5
+      administrating: [],    
     },
     {
       name: "Krish Rajagopalan",
@@ -62,8 +57,7 @@ module.exports.bootstrap = function(cb) {
       github: "krish-andres",
       twitter: "@lookatmyawesomebody",
       teams: [],
-      administrating: [],
-      id: 6
+      administrating: [],    
     },
     {
       name: "Connor Kojimoto",
@@ -71,8 +65,7 @@ module.exports.bootstrap = function(cb) {
       github: "conroyce",
       twitter: "@silentanddeadly",
       teams: [],
-      administrating: [],
-      id: 7
+      administrating: [],    
     },
     {
       name: "Tae Yoon",
@@ -80,8 +73,7 @@ module.exports.bootstrap = function(cb) {
       github: "xoddong",
       twitter: "@sailsangularbootstrapfoundationh8r",
       teams: [],
-      administrating: [],
-      id: 8
+      administrating: [],    
     },
     {
       name: "Kenny Czadzeck",
@@ -89,8 +81,7 @@ module.exports.bootstrap = function(cb) {
       github: "kennyczadzeck",
       twitter: "@kennyspenny",
       teams: [],
-      administrating: [],
-      id: 9
+      administrating: [],    
     },
     {
       name: "Jeff Louie",
@@ -99,7 +90,6 @@ module.exports.bootstrap = function(cb) {
       twitter: "@toomuchmuscle",
       teams: [],
       administrating: [],
-      id: 10
     },
     {
       name: "Daniel Olasky",
@@ -108,7 +98,6 @@ module.exports.bootstrap = function(cb) {
       twitter: "@catman",
       teams: [],
       administrating: [],
-      id: 11
     },
     {
       name: "Pipe Guiterrez",
@@ -117,7 +106,6 @@ module.exports.bootstrap = function(cb) {
       twitter: "@pipedream",
       teams: [],
       administrating: [],
-      id: 12
     },
     {
       name: "Shehzan Devani",
@@ -126,102 +114,155 @@ module.exports.bootstrap = function(cb) {
       twitter: "@powerpuffgirlfan",
       teams: [],
       administrating: [],
-      id: 13
     }
   ];
 
-  var libraries = [
+  var librariesData = [
     {
-      id: 1,
       name: "library1",
       team: 1
     },
     {
-      id: 2,
       name: "library2",
       team: 2
     }
   ];
 
-  var modules = [
+  var modulesData = [
     {
-      id: 1,
       name: "module1"
     },
     {
-      id: 2,
       name: "module2"
     },
     {
-      id: 3,
       name: "module3"
     }
   ];
 
-  var lessons = [
+  var lessonsData = [
     {
-      id: 1,
       title: "lesson1",
       body: "#Don't be a dick"
     },
     {
-      id: 2,
       title: "lesson2",
       body: "Brush your teeth **three** _times_ a day"
     },
     {
-      id: 3,
       title: "lesson3",
       body: "Don't trust anyone"
     },
     {
-      id: 4,
       title: "lesson4",
       body: "snoop d o double g"
     }
   ];
 
-  var teams = [
+  var teamsData = [
     {
-      id: 1,
       name: "Core",
-      users: [1,2,3,7,8,9],
-      library: [1],
-      admins: [1,2,3,7,8,9]
+      users: [],
+      library: [],
+      admins: []
     },
     {
-      id: 2,
       name: "Team 2",
-      users: [4,5,6,10,11,12,13],
-      library: [2],
-      admins: [4,5,6,10,11,12,13]
+      users: [],
+      library: [],
+      admins: []
     }
   ];
 
-  User.create(users).exec(function(err, user){
-    Library.create(libraries).exec(function(err, lib) {
-      Module.create(modules).exec(function(err, modules) {
-        lib[0].modules.add(1);
-        lib[0].modules.add(2);
-        lib[0].save();
+  User.create(usersData).then(function(users) {
+    return [
+      users,
+      Team.create(teamsData),
+      Library.create(librariesData),
+      Module.create(modulesData),
+      Lesson.create(lessonsData)
+    ]
+  })
+  .spread(function(users, teams, libraries, modules, lessons) {
+    // Add modules to libraries
+    libraries[0].modules.add(modules[0].id);
+    libraries[0].modules.add(modules[1].id);
+    libraries[0].save();
 
-        lib[1].modules.add(3);
-        lib[1].save();
-        Lesson.create(lessons).exec(function(err, lessons) {
-          modules[0].lessons.add(1);
-          modules[0].lessons.add(2);
-          modules[0].save();
+    libraries[1].modules.add(modules[2].id);
+    libraries[1].save();
 
-          modules[1].lessons.add(3);
-          modules[1].save();
+    // Add Lessons to modules
+    modules[0].lessons.add(lessons[0].id);
+    modules[0].lessons.add(lessons[1].id);
+    modules[0].save();
 
-          modules[2].lessons.add(4);
-          modules[2].save();
-          Team.create(teams).exec(function(err, team) {
-            cb();
-          });
-        });
-      });
-    });
+    modules[1].lessons.add(lessons[2].id);
+    modules[1].save();
+
+    modules[2].lessons.add(lessons[3].id);
+    modules[2].save();
+
+    // Add users to teams
+    teams[0].users.add(users[0].id);
+    teams[0].users.add(users[1].id);
+    teams[0].users.add(users[2].id);
+    teams[0].users.add(users[3].id);
+    teams[0].users.add(users[4].id);
+    teams[0].users.add(users[5].id);
+    teams[0].users.add(users[6].id);
+
+    teams[1].users.add(users[7].id);
+    teams[1].users.add(users[8].id);
+    teams[1].users.add(users[9].id);
+    teams[1].users.add(users[10].id);
+    teams[1].users.add(users[11].id);
+    teams[1].users.add(users[12].id);
+
+    // Make users admins
+    users[0].administrating.add(teams[0].id);
+    users[1].administrating.add(teams[0].id);
+    users[2].administrating.add(teams[0].id);
+    users[3].administrating.add(teams[0].id);
+    users[4].administrating.add(teams[0].id);
+    users[5].administrating.add(teams[0].id);
+    users[6].administrating.add(teams[0].id);
+    users[7].administrating.add(teams[0].id);
+    users[8].administrating.add(teams[0].id);
+    users[9].administrating.add(teams[0].id);
+    users[10].administrating.add(teams[0].id);
+    users[11].administrating.add(teams[0].id);
+    users[12].administrating.add(teams[0].id);
+
+    // Remember the callback
+    cb();
   });
+
+  // User.create(users).exec(function(err, user){
+  //   Library.create(libraries).exec(function(err, lib) {
+  //     Module.create(modules).exec(function(err, modules) {
+  //       lib[0].modules.add(modules[0].id);
+  //       lib[0].modules.add(modules[1].id);
+  //       lib[0].save();
+
+  //       lib[1].modules.add(modules[2].id);
+  //       lib[1].save();
+  //       Lesson.create(lessons).exec(function(err, lessons) {
+  //         modules[0].lessons.add(lessons[0].id);
+  //         modules[0].lessons.add(lessons[1].id);
+  //         modules[0].save();
+
+  //         modules[1].lessons.add(lessons[2].id);
+  //         modules[1].save();
+
+  //         modules[2].lessons.add(lessons[3].id);
+  //         modules[2].save();
+  //         Team.create(teams).exec(function(err, team) {
+  //           team[0].users.add(user[0].id);
+  //           cb();
+  //         });
+  //       });
+  //     });
+  //   });
+  // });
 };
