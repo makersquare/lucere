@@ -57,7 +57,9 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
     $rootScope.$on("$routeChangeStart", function(e) {
       if(!AuthService.loggedIn()) {
         AuthService.login(function(user) {
-          if(user.teams.length === 0 && user.administrating.length === 0) {
+          if(!user) {
+            $location.path("/login");
+          } else if(user.teams.length === 0 && user.administrating.length === 0) {
             $location.path("/user/"+user.id);
           }
         });    
