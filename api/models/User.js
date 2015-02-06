@@ -34,11 +34,3 @@ module.exports = {
     }
   }
 };
-
-if(process.env !== "production") {
-  module.exports.attributes.id = {
-    primaryKey: true,
-    type: "integer",
-    required: true
-  }
-}

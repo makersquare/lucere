@@ -28,8 +28,7 @@ module.exports = {
   },
   models: {
     migrate: "drop",
-    connection: "local",
-    autoPK: false
+    connection: "local"
   }
 
  
