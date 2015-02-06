@@ -1,3 +1,3 @@
-app.controller("moduleCtrl", ["$scope", function($scope) {
+app.controller("ModuleCtrl", ["$scope", function($scope) {
 
 }]);

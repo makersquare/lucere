@@ -1,4 +1,4 @@
-app.controller("userCtrl", ["$scope", "$routeParams", "User", "AuthService", function($scope, $routeParams, User, AuthService) {
+app.controller("UserCtrl", ["$scope", "$routeParams", "User", "AuthService", function($scope, $routeParams, User, AuthService) {
   var userId  = parseInt($routeParams.userId);
   var userRecord = User.User.get({id: userId});
   $scope.userForm = {name: "", email: "", github: "", twitter: ""};

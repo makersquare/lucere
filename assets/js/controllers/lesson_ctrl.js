@@ -1,3 +1,3 @@
-app.controller("lessonCtrl", ["$scope", function($scope) { 
+app.controller("LessonCtrl", ["$scope", function($scope) { 
   
 }]);

@@ -1,4 +1,4 @@
-app.controller("userCreationCtrl", ["$scope", "User", function($scope, User) {
+app.controller("UserCreationCtrl", ["$scope", "User", function($scope, User) {
   $scope.newUser = {};
   $scope.users = [];
   
