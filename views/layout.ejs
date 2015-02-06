@@ -29,6 +29,10 @@
     -->
 
     <!--STYLES-->
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/module.css">
+    <link rel="stylesheet" href="/styles/top_nav.css">
     <!--STYLES END-->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/zenburn.min.css">
@@ -39,7 +43,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-        <div ng-controller="userViewCtrl">
+        <div ng-controller="UserViewCtrl">
           <div ng-show="admin">
             <admin-top-nav-directive></admin-top-nav-directive>
           </div>
@@ -52,7 +56,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-        <div ng-controller="userViewCtrl">
+        <div ng-controller="UserViewCtrl">
           <div ng-show="admin">
             <admin-sidebar-directive></admin-sidebar-directive>
           </div>
@@ -119,6 +123,40 @@
     -->
 
     <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/angular-resource/angular-resource.min.js"></script>
+    <script src="/vendor/angular-route/angular-route.min.js"></script>
+    <script src="/vendor/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers/header_ctrl.js"></script>
+    <script src="/js/controllers/lesson_ctrl.js"></script>
+    <script src="/js/controllers/library_ctrl.js"></script>
+    <script src="/js/controllers/module_ctrl.js"></script>
+    <script src="/js/controllers/sidebar_ctrl.js"></script>
+    <script src="/js/controllers/team_ctrl.js"></script>
+    <script src="/js/controllers/user_creation_ctrl.js"></script>
+    <script src="/js/controllers/user_ctrl.js"></script>
+    <script src="/js/controllers/user_view_ctrl.js"></script>
+    <script src="/js/directives/admin_lesson_directive.js"></script>
+    <script src="/js/directives/admin_library_directive.js"></script>
+    <script src="/js/directives/admin_module_directive.js"></script>
+    <script src="/js/directives/admin_sidebar_directive.js"></script>
+    <script src="/js/directives/admin_top_nav_directive.js"></script>
+    <script src="/js/directives/student_lesson_directive.js"></script>
+    <script src="/js/directives/student_library_directive.js"></script>
+    <script src="/js/directives/student_module_directive.js"></script>
+    <script src="/js/directives/student_sidebar_directive.js"></script>
+    <script src="/js/directives/student_top_bar_directive.js"></script>
+    <script src="/js/services/auth_service.js"></script>
+    <script src="/js/services/bar_service.js"></script>
+    <script src="/js/services/lesson_service.js"></script>
+    <script src="/js/services/library_service.js"></script>
+    <script src="/js/services/module_service.js"></script>
+    <script src="/js/services/team_service.js"></script>
+    <script src="/js/services/user_service.js"></script>
     <!--SCRIPTS END-->
     <script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
     <script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
