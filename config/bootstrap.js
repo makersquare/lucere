@@ -211,6 +211,7 @@ module.exports.bootstrap = function(cb) {
     teams[0].users.add(users[4].id);
     teams[0].users.add(users[5].id);
     teams[0].users.add(users[6].id);
+    teams[0].save();
 
     teams[1].users.add(users[7].id);
     teams[1].users.add(users[8].id);
@@ -218,6 +219,7 @@ module.exports.bootstrap = function(cb) {
     teams[1].users.add(users[10].id);
     teams[1].users.add(users[11].id);
     teams[1].users.add(users[12].id);
+    teams[1].save();
 
     // Make users admins
     users[0].administrating.add(teams[0].id);
@@ -233,36 +235,11 @@ module.exports.bootstrap = function(cb) {
     users[10].administrating.add(teams[0].id);
     users[11].administrating.add(teams[0].id);
     users[12].administrating.add(teams[0].id);
-
+    users.forEach(function(user) {
+      user.save();
+    });
+    
     // Remember the callback
     cb();
   });
-
-  // User.create(users).exec(function(err, user){
-  //   Library.create(libraries).exec(function(err, lib) {
-  //     Module.create(modules).exec(function(err, modules) {
-  //       lib[0].modules.add(modules[0].id);
-  //       lib[0].modules.add(modules[1].id);
-  //       lib[0].save();
-
-  //       lib[1].modules.add(modules[2].id);
-  //       lib[1].save();
-  //       Lesson.create(lessons).exec(function(err, lessons) {
-  //         modules[0].lessons.add(lessons[0].id);
-  //         modules[0].lessons.add(lessons[1].id);
-  //         modules[0].save();
-
-  //         modules[1].lessons.add(lessons[2].id);
-  //         modules[1].save();
-
-  //         modules[2].lessons.add(lessons[3].id);
-  //         modules[2].save();
-  //         Team.create(teams).exec(function(err, team) {
-  //           team[0].users.add(user[0].id);
-  //           cb();
-  //         });
-  //       });
-  //     });
-  //   });
-  // });
 };
