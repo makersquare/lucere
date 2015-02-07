@@ -9,19 +9,15 @@ app.factory("TeamBuilder", ["Team", function(Team) {
     return Team.get({id: id});
   };
 
-  var addUser = function(teamId, user, cb) {
-    var team = Team.get({id: teamId}, function(data) {
-      data.users.push(user);
-      data.$update(cb);
-    });
+  var addUser = function(team, user, cb) {
+    team.users.push(user);
+    team.$update(cb);
   };
 
   var addAdmin = function(teamId, user, cb) {
-    var team = Team.get({id: teamId}, function(data) {
-      data.admins.push(user);
-      data.users.push(user);
-      data.$update(cb);
-    });
+    team.users.push(user);
+    team.admins.push(user);
+    team.$update(cb);
   };
 
   return: {
