@@ -120,23 +120,24 @@ module.exports.bootstrap = function(cb) {
   var librariesData = [
     {
       name: "library1",
-      team: 1
     },
     {
       name: "library2",
-      team: 2
     }
   ];
 
   var modulesData = [
     {
-      name: "module1"
+      name: "module1",
+      lessons: []
     },
     {
-      name: "module2"
+      name: "module2",
+      lessons: []
     },
     {
-      name: "module3"
+      name: "module3",
+      lessons: []
     }
   ];
 
@@ -163,13 +164,11 @@ module.exports.bootstrap = function(cb) {
     {
       name: "Core",
       users: [],
-      library: [],
       admins: []
     },
     {
       name: "Team 2",
       users: [],
-      library: [],
       admins: []
     }
   ];
@@ -184,92 +183,69 @@ module.exports.bootstrap = function(cb) {
     ]
   })
   .spread(function(users, teams, libraries, modules, lessons) {
-    // Add modules to libraries
-    libraries[0].modules.add(modules[0].id);
-    libraries[0].modules.add(modules[1].id);
-    libraries[0].save();
 
-    libraries[1].modules.add(modules[2].id);
-    libraries[1].save();
+    Team.update({id: teams[0].id}, {library: libraries[0].id}).exec(function(err, coreTeam){
+      coreTeam[0].users.add(users[0].id);
+      coreTeam[0].users.add(users[1].id);
+      coreTeam[0].users.add(users[2].id);
+      coreTeam[0].users.add(users[3].id);
+      coreTeam[0].users.add(users[4].id);
+      coreTeam[0].users.add(users[5].id);
+      coreTeam[0].users.add(users[6].id);
 
-    // Add Lessons to modules
-    modules[0].lessons.add(lessons[0].id);
-    modules[0].lessons.add(lessons[1].id);
-    modules[0].save();
-
-    modules[1].lessons.add(lessons[2].id);
-    modules[1].save();
-
-    modules[2].lessons.add(lessons[3].id);
-    modules[2].save();
-
-    // Add users to teams
-    teams[0].users.add(users[0].id);
-    teams[0].users.add(users[1].id);
-    teams[0].users.add(users[2].id);
-    teams[0].users.add(users[3].id);
-    teams[0].users.add(users[4].id);
-    teams[0].users.add(users[5].id);
-    teams[0].users.add(users[6].id);
-    teams[0].save();
-
-
-    teams[1].users.add(users[7].id);
-    teams[1].users.add(users[8].id);
-    teams[1].users.add(users[9].id);
-    teams[1].users.add(users[10].id);
-    teams[1].users.add(users[11].id);
-    teams[1].users.add(users[12].id);
-    teams[1].save();
-
-
-    // Make users admins
-    users[0].administrating.add(teams[0].id);
-    users[1].administrating.add(teams[0].id);
-    users[2].administrating.add(teams[0].id);
-    users[3].administrating.add(teams[0].id);
-    users[4].administrating.add(teams[0].id);
-    users[5].administrating.add(teams[0].id);
-    users[6].administrating.add(teams[0].id);
-    users[7].administrating.add(teams[0].id);
-    users[8].administrating.add(teams[0].id);
-    users[9].administrating.add(teams[0].id);
-    users[10].administrating.add(teams[0].id);
-    users[11].administrating.add(teams[0].id);
-    users[12].administrating.add(teams[0].id);
-    users.forEach(function(user) {
-      user.save();
+      coreTeam[0].admins.add(users[0].id);
+      coreTeam[0].admins.add(users[1].id);
+      coreTeam[0].admins.add(users[2].id);
+      coreTeam[0].admins.add(users[3].id);
+      coreTeam[0].admins.add(users[4].id);
+      coreTeam[0].admins.add(users[5].id);
+      coreTeam[0].admins.add(users[6].id);
+      coreTeam[0].admins.add(users[7].id);
+      coreTeam[0].admins.add(users[8].id);
+      coreTeam[0].admins.add(users[9].id);
+      coreTeam[0].admins.add(users[10].id);
+      coreTeam[0].admins.add(users[11].id);
+      coreTeam[0].admins.add(users[12].id);
+      
+      coreTeam[0].save().then(function(updatedCoreTeam, err) {
+        Library.update({id: libraries[0].id}, {team: coreTeam[0].id}).exec(function(err, coreLibrary){
+          coreLibrary[0].modules.add(modules[0].id);
+          coreLibrary[0].modules.add(modules[1].id);
+          coreLibrary[0].save().then(function(updatedCoreLibrary, err) {
+            // Seems to only work if you set the module on the lesson
+            // rather than the lesson on the module.
+            lessons[0].module = updatedCoreLibrary.modules[0].id;
+            lessons[0].save();
+            lessons[1].module = updatedCoreLibrary.modules[0].id;
+            lessons[1].save();
+            lessons[2].module = updatedCoreLibrary.modules[1].id;
+            lessons[2].save();
+          });
+        });
+      });
     });
-    
-    // Remember the callback
+
+    Team.update({id: teams[1].id}, {library: libraries[1].id}).exec(function(err, regularCohort) {
+      regularCohort[0].users.add(users[7].id);
+      regularCohort[0].users.add(users[8].id);
+      regularCohort[0].users.add(users[9].id);
+      regularCohort[0].users.add(users[10].id);
+      regularCohort[0].users.add(users[11].id);
+      regularCohort[0].users.add(users[12].id);
+      regularCohort[0].save().then(function(team, err) {
+        Library.update({id: libraries[1].id}, {team: teams[1].id}).exec(function(err, cohortLibrary){
+          cohortLibrary[0].modules.add(modules[2].id);
+          cohortLibrary[0].save().then(function(updatedCohortLibrary, err) {
+            // Seems to only work if you set the module on the lesson
+            // rather than the lesson on the module.
+            lessons[3].module = updatedCohortLibrary.modules[0].id;
+            lessons[3].save();
+          });
+        });
+      });
+    });
+
     cb();
   });
 
-  // User.create(users).exec(function(err, user){
-  //   Library.create(libraries).exec(function(err, lib) {
-  //     Module.create(modules).exec(function(err, modules) {
-  //       lib[0].modules.add(modules[0].id);
-  //       lib[0].modules.add(modules[1].id);
-  //       lib[0].save();
-
-  //       lib[1].modules.add(modules[2].id);
-  //       lib[1].save();
-  //       Lesson.create(lessons).exec(function(err, lessons) {
-  //         modules[0].lessons.add(lessons[0].id);
-  //         modules[0].lessons.add(lessons[1].id);
-  //         modules[0].save();
-
-  //         modules[1].lessons.add(lessons[2].id);
-  //         modules[1].save();
-
-  //         modules[2].lessons.add(lessons[3].id);
-  //         modules[2].save();
-  //         Team.create(teams).exec(function(err, team) {
-  //           team[0].users.add(user[0].id);
-  //           cb();
-  //         });
-  //       });
-  //     });
-  //   });
-  // });
 };
