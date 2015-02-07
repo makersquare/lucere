@@ -9,5 +9,5 @@ app.factory("LessonBuilder", ["Lesson", function(Lesson) {
 
   return {
     editLesson: editLesson
-  }
+  };
 }]);

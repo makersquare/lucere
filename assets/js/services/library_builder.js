@@ -10,8 +10,7 @@ app.factory("LibraryBuilder", ["Library", "Module", function(Library, Module) {
   };
 
   var removeModule = function(moduleId) {
-    var module = Module.get({id: moduleId});
-    module.$remove();
+    Module.remove({id: moduleId});
   }; 
 
   var editModuleName = function(name, moduleId) {
@@ -26,5 +25,5 @@ app.factory("LibraryBuilder", ["Library", "Module", function(Library, Module) {
     addModule: addModule, 
     removeModule: removeModule,
     editModuleName: editModuleName
-  } 
+  };
 }]);

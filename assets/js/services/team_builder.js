@@ -1,6 +1,5 @@
 app.factory("TeamBuilder", ["Team", function(Team) {
 
-
   var createTeam = function(name, cb) {
     var team = new Team({name: name});
     team.$save(cb);
@@ -30,5 +29,5 @@ app.factory("TeamBuilder", ["Team", function(Team) {
     team: team, 
     addUser: addUser, 
     addAdmin: addAdmin
-  }
+  };
 }]);

@@ -10,14 +10,12 @@ app.factory("ModuleBuilder", ["Module", "Lesson", function(Module, Lesson) {
   };
 
   var removeLesson = function(lessonId) {
-    var lesson = Lesson.get({id: lessonId});
-    lesson.$remove();
+    Lesson.remove({id: lessonId});
   };
-
 
   return {
     module: module,
     addLesson: addLesson,
     removeLesson: removeLesson
-  }
+  };
 }]);
