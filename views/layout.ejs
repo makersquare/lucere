@@ -40,30 +40,63 @@
   </head>
 
   <body>
+
+  <!-- THIS IS THE NAVBAR UP TOP -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-        <div ng-controller="UserViewCtrl">
-          <div ng-show="admin">
-            <admin-top-nav-directive></admin-top-nav-directive>
-          </div>
-          <div ng-show="!admin">
-            <student-top-bar-directive></student-top-bar-directive>
-          </div>
+
+        <div ng-controller="TopbarCtrl">
+          <nav ng-cloak class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="col-lg-3">
+                <!-- location for search field and button -->
+              </div>
+              <div class="col-lg-9" ng-cloak>
+                <span ng-show="AuthService.currentUser">
+                  <ul class="nav navbar-nav">
+                    <li><a ng-href="#/library/{{AuthService.currentUser.teams[0].library}}">Library</a></li>
+                  </ul>
+
+                  <ul class="nav navbar-nav">
+                    <li><a ng-href="#/teams/{{AuthService.currentUser.teams[0].id}}">Team</a></li>
+                  </ul>
+                  <!-- TODO change to logo -->
+                  <ul class="nav navbar-nav navbar-right">
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <a class="navbar-brand" href="/"><b>lucere</b></a>
+                    <li><a ng-href="#/user/{{currentUser.id}}">{{currentUser.name}}</a></li>
+                    <li><a href="" ng-click="AuthService.logout()">Logout</a></li>
+                  </ul>
+                </span>
+                <span ng-hide="AuthService.currentUser">
+                  <a href="/#/login">Login</a>
+                </span>
+              </div>
+            </div><!-- /.container-fluid -->
+
+          </nav>
+
         </div>
+
+
       </div>
     </div>
   <div class="container">
+
+
+
     <div class="row">
       <div class="col-lg-3">
-        <div ng-controller="UserViewCtrl">
+        <!-- <div ng-controller="UserViewCtrl"> -->
           <div ng-show="admin">
-            <admin-sidebar-directive></admin-sidebar-directive>
+            <!-- <admin-sidebar-directive></admin-sidebar-directive> -->
           </div>
           <div ng-show="!admin">
-            <student-sidebar-directive></student-sidebar-directive>
+            <!-- <student-sidebar-directive></student-sidebar-directive> -->
           </div>
-        </div>
+        <!-- </div> -->
       </div>
       <div class="col-lg-9 main">
         <ng-view></ng-view>
@@ -137,12 +170,11 @@
     <script src="/js/controllers/module_ctrl.js"></script>
     <script src="/js/controllers/sidebar_ctrl.js"></script>
     <script src="/js/controllers/team_ctrl.js"></script>
+    <script src="/js/controllers/topbar_ctrl.js"></script>
     <script src="/js/controllers/user_creation_ctrl.js"></script>
     <script src="/js/controllers/user_ctrl.js"></script>
     <script src="/js/controllers/user_view_ctrl.js"></script>
     <script src="/js/directives/admin_lesson_directive.js"></script>
-    <script src="/js/directives/admin_library_directive.js"></script>
-    <script src="/js/directives/admin_module_directive.js"></script>
     <script src="/js/directives/admin_sidebar_directive.js"></script>
     <script src="/js/directives/admin_top_nav_directive.js"></script>
     <script src="/js/directives/student_lesson_directive.js"></script>

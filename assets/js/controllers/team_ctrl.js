@@ -8,12 +8,11 @@ app.controller("TeamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthServi
   var currentUser;
 
   var getAdminStatus = function() {
-    AuthService.currentUser(function(user) {
-      currentUser = user;
-      $scope.isAdmin = user.administrating.reduce(function(a, b) {
-        return a || b.id === teamId;
-      }, false);
-    });
+    currentUser = AuthService.currentUser;
+    user = AuthService.currentUser;
+    $scope.isAdmin = user.administrating.reduce(function(a, b) {
+      return a || b.id === teamId;
+    }, false);
   }
 
   getAdminStatus();

@@ -31,7 +31,7 @@ app.factory("AuthService", ["$http", "$location", function($http, $location) {
       url: "/user/currentuser"
     });
     request.success(function(data) {
-      service.myUser = data;
+      service.currentUser = data;
     });
   }
 
@@ -56,14 +56,6 @@ app.factory("AuthService", ["$http", "$location", function($http, $location) {
     });
   };
 
-  var currentUser = function(cb) {
-    if(user) {
-      return cb(user);
-    }
-
-    login(cb);
-  };
-
   var userData = function() {
     return request;
   };
@@ -76,7 +68,6 @@ app.factory("AuthService", ["$http", "$location", function($http, $location) {
 
   service.login = login;
   service.logout = logout;
-  service.currentUser = currentUser;
   service.userData = userData;
   service.loggedIn = loggedIn;
   service.authorizeStudent = authorizeStudent;
