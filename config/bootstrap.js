@@ -211,6 +211,8 @@ module.exports.bootstrap = function(cb) {
     teams[0].users.add(users[4].id);
     teams[0].users.add(users[5].id);
     teams[0].users.add(users[6].id);
+    teams[0].save();
+
 
     teams[1].users.add(users[7].id);
     teams[1].users.add(users[8].id);
@@ -218,6 +220,8 @@ module.exports.bootstrap = function(cb) {
     teams[1].users.add(users[10].id);
     teams[1].users.add(users[11].id);
     teams[1].users.add(users[12].id);
+    teams[1].save();
+
 
     // Make users admins
     users[0].administrating.add(teams[0].id);
@@ -233,7 +237,10 @@ module.exports.bootstrap = function(cb) {
     users[10].administrating.add(teams[0].id);
     users[11].administrating.add(teams[0].id);
     users[12].administrating.add(teams[0].id);
-
+    users.forEach(function(user) {
+      user.save();
+    });
+    
     // Remember the callback
     cb();
   });
