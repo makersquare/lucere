@@ -12,17 +12,19 @@
 
 module.exports = {
 
+  connections: {
+    development: {
+      adapter: 'sails-mongo',
+      host: process.env.MONGO_HOST,
+      port: process.env.MONGO_PORT,
+      user: process.env.MONGO_USER,
+      database: process.env.MONGO_DB,
+      password: process.env.MONGO_PW
+    }
+  },
   models: {
-    migrate: "drop"
+    migrate: "drop",
+    connection: "development"
   }
-
-  /***************************************************************************
-   * Set the default database connection for models in the development       *
-   * environment (see config/connections.js and config/models.js )           *
-   ***************************************************************************/
-
-  // models: {
-  //   connection: 'someMongodbServer'
-  // }
 
 };

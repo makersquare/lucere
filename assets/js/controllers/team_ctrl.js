@@ -1,5 +1,5 @@
 app.controller("TeamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthService", function($scope, $routeParams, Team, User, AuthService){
-  var teamId = parseInt($routeParams.teamId);
+  var teamId = $routeParams.teamId;
   $scope.team = Team.get({id: teamId});
   $scope.newUser = {};
   $scope.newTeam = {};
