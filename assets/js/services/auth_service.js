@@ -39,6 +39,7 @@ app.factory("AuthService", ["$http", "$location", function($http, $location) {
     user = null;
     //reset this http request
     setUserRequest();
+    service.currentUser = null;
     $location.path("/login");
     $http.get("/logout");
   }
