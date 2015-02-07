@@ -1,1 +1,30 @@
-<admin-module-directive></admin-module-directive>
+<div class="container">
+  <div class="row row-bottom-margin">
+    <div class="col-xs-4">
+      <h2>Module View</h2>
+    </div>
+    <div class="col-xs-3 module-input-top-margin">
+      <form name="moduleNameForm" novalidate>
+        <input type="text" class="form-control" ng-model="module.name" required>
+      </form>
+    </div>
+  </div>
+  <div class="row row-bottom-margin">
+    <form name="addLessonForm" ng-submit="createLesson(newLessonTitle)" novalidate>
+      <div class="col-xs-4">
+        <input type="text" placeholder="New Lesson" class="form-control" ng-model="newLessonTitle" required>
+      </div>
+      <div class="col-xs-4">
+        <input type="submit" value="&plus; Create Lesson For Module" class="btn btn-success" ng-disabled="addLessonForm.$invalid">
+      </div>
+    </form>
+  </div>
+  <div class="row row-bottom-margin">
+    <ul ng-repeat="lesson in module.lessons">
+      <a href="/#/admin/library/{{module.library.id}}/module/{{module.id}}/lesson/{{lesson.id}}">
+        <li>{{lesson.title}}</li>
+      </a>
+    </ul>
+  </div>
+  <button class="btn" ng-class="{'btn-success' : currentName !== module.name}" ng-click="updateName()">Save Changes</button>
+</div>
