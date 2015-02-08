@@ -1,6 +1,7 @@
-app.factory("AuthService", ["$http", "$location", function($http, $location) {
+app.factory("AuthService", ["$http", "$location", "StateTracker", function($http, $location, StateTracker) {
   var service = {};
   var user = null;
+  service.isAdmin = false;
 
   var authorizeStudent = function(cb) {
     return request.success(function(data) {
@@ -32,7 +33,14 @@ app.factory("AuthService", ["$http", "$location", function($http, $location) {
     });
     request.success(function(data) {
       service.currentUser = data;
+      StateTracker.updateViewAsPreference(data);
+      service.isAdmin = isUserAdmin(data);
     });
+  }
+
+  var isUserAdmin = function(user) {
+    service.isAdmin = (user.administrating.length > 0);
+    return service.isAdmin;
   }
 
   var logout = function() {

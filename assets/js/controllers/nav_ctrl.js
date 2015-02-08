@@ -1,3 +1,3 @@
-app.controller("NavCtrl", ['$scope', 'AuthService', function($scope, AuthService) {
-  $scope.AuthService = AuthService;
+app.controller("NavCtrl", ['$scope', 'StateTracker', function($scope, StateTracker) {
+  $scope.StateTracker = StateTracker;
 }]);

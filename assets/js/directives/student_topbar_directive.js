@@ -1,8 +1,9 @@
-app.directive("studentTopbar", ["Module", "AuthService", function(Module, AuthService) {
+app.directive("studentTopbar", ["AuthService", "StateTracker", function(AuthService, StateTracker) {
   return {
-    templateUrl: "/js/templates/directives/topbar.html",
+    templateUrl: "/js/templates/directives/student_topbar.html",
     link: function(scope, attr, elem) {
       scope.AuthService = AuthService;
+      scope.StateTracker = StateTracker;
     }
   };
 }]);

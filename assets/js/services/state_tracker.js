@@ -1,5 +1,37 @@
-app.factory("StateTracker", ["Library", "Module", "$route", "$q", function(Library, Module, $route, $q) {
+app.factory("StateTracker", ["Library", "Module", "$route", "$q", '$location', function(Library, Module, $route, $q, $location) {
   var currentState = {};
+
+  var viewAsMode = false, viewAsLibrary;
+
+  var currentUser;
+
+  currentState.showAdminFunctionality = false;
+
+  currentState.viewAs = function(team) {
+    viewAsMode = true;
+    currentState.viewAsTeam = team;
+    currentState.updateViewAsPreference();
+    $location.path("/library/" + team.id);
+  };
+
+  currentState.viewAsAdmin = function() {
+    viewAsMode = false;
+    currentState.viewAsTeam = undefined;
+    currentState.updateViewAsPreference();
+    $location.path("/admin/library/" + currentState.library.id);
+  };
+
+  currentState.updateViewAsPreference = function(user) {
+    // You cannot view as admin if you are not signed in
+    // You cannot view as admin if you are not an administrator
+    // You cannot view as admin if you are viewing as a student
+    if (user) { currentUser = user };
+    currentState.showAdminFunctionality = currentUser
+      && currentUser.administrating.length
+      && !viewAsMode;
+
+    return currentState.showAdminFunctionality;
+  };
 
   currentState.setLibraryState = function() {
     var id = $route.current.params.libraryId;
@@ -21,8 +53,6 @@ app.factory("StateTracker", ["Library", "Module", "$route", "$q", function(Libra
         currentState.modules = Module.query({library: libraries[0].libraryId});
       });
     }
-
-    console.log(resolves);
 
     return $q.all(resolves);
   }

@@ -18,12 +18,25 @@
         </li>
       </ul>
     </li>
+
+    <!-- View As Button -->
+    <li class="dropdown" ng-show="AuthService.isAdmin">
+      <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View As<span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="team in AuthService.currentUser.teams">
+          <a ng-click="StateTracker.viewAs(team)">{{team.name}}</a>
+        </li>
+        <li><a ng-click="StateTracker.viewAsAdmin()">Admin</a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul class="nav navbar-nav navbar-right">
     <li><a class="nav-title">lucere</a></li>
     <li class="nav navbar-nav navbar-right"><a href="" ng-click="AuthService.logout()">Log Out</a></li>
     <li><a ng-href="#/user/{{AuthService.currentUser.id}}">{{AuthService.currentUser.name}}</a></li>
+
   </ul>
+
 
 </div>  <!-- close div.collapse navbar-collapse -->
