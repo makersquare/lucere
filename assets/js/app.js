@@ -1,11 +1,20 @@
 var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
   .config(["$routeProvider", function($routeProvider) {
 
+    var addLibraryResolves = function(resolve) {
+      resolve.libraryState = function(StateTracker) {
+        return StateTracker.setLibraryState();
+      }
+    };
+
     $routeProvider.whenAuth = function(url, options) {
       options.resolve = options.resolve || {};
       options.resolve.authorize = function(AuthService) {
         return AuthService.authorizeStudent();
       }
+
+      addLibraryResolves(options.resolve);
+
       return this.when(url, options);
     };
 
@@ -14,6 +23,8 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
       options.resolve.authorize = function(AuthService) {
         return AuthService.authorizeAdmin();
       }
+
+      addLibraryResolves(options.resolve);
       return this.when(url, options);
     };
 
