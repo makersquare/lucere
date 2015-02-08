@@ -3,21 +3,26 @@ app.factory("StateTracker", ["Library", "Module", "$route", "$q", function(Libra
 
   currentState.setLibraryState = function() {
     var id = $route.current.params.libraryId;
+    var resolves = {};
 
-    if (!currentState.library || currentState.library.id != id) {
+    if (id && (!currentState.library || currentState.library.id != id)) {
       currentState.library = Library.get({id: id});
+      resolves.library = currentState.library;
       currentState.modules = Module.query({library: id});
+      resolves.modules = currentState.modules;
     }
 
     if (!currentState.libraries) {
       currentState.libraries = Library.query();
+      resolves.libraries = currentState.libraries;
+
+      resolves.libraries.$promise.then(function(libraries) {
+        currentState.library = currentState.library || libraries[0];
+        currentState.modules = Module.query({library: libraries[0].libraryId});
+      });
     }
 
-    var resolves = {
-      library: currentState.library.$promise,
-      modules: currentState.modules.$promise,
-      libraries: currentState.libraries.$promise
-    };
+    console.log(resolves);
 
     return $q.all(resolves);
   }
