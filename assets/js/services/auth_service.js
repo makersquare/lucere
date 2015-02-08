@@ -65,10 +65,6 @@ app.factory("AuthService", ["$http", "$location", function($http, $location) {
     return (user ? true : false);
   };
 
-  var isAdmin = function() {
-    return currentUser.administrating.length > 0;
-  }
-
   setUserRequest();
 
   service.login = login;

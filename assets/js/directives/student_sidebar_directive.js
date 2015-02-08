@@ -1,13 +1,9 @@
-app.directive("studentSidebarDirective", ["Module", "AuthService", "StateTracker", function(Module, AuthService, StateTracker) {
+app.directive("studentSidebar", ["AuthService", "AuthService", "StateTracker", function(AuthService, AuthService, StateTracker) {
   return {
-    templateUrl: "/js/templates/directives/student_sidebar_template.html",
+    templateUrl: "/js/templates/directives/student_sidebar.html",
     link: function(scope, attr, elem) {
-      AuthService.currentUser(function(user) {
-        if(user) {
-          scope.StateTracker = StateTracker;
-          StateTracker.loadLibrary(user.teams[0].library);
-        }
-      });
+      scope.StateTracker = StateTracker;
+      scope.AuthService = AuthService;
     }
   };
 }]);
