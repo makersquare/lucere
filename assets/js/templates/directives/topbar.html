@@ -1,33 +1,22 @@
-<div ng-controller="TopbarCtrl">
-  <nav ng-cloak class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="col-lg-3">
-        <!-- location for search field and button -->
-      </div>
-      <div class="col-lg-9" ng-cloak>
-        <span ng-show="AuthService.currentUser">
-          <ul class="nav navbar-nav">
-            <li><a ng-href="#/library/{{AuthService.currentUser.teams[0].library}}">Library</a></li>
-          </ul>
+<div class="col-lg-9" ng-cloak>
+  <span ng-show="AuthService.currentUser">
+    <ul class="nav navbar-nav">
+      <li><a ng-href="#/library/{{AuthService.currentUser.teams[0].library}}">Library</a></li>
+    </ul>
 
-          <ul class="nav navbar-nav">
-            <li><a ng-href="#/team/{{AuthService.currentUser.teams[0].id}}">Team</a></li>
-          </ul>
-          <!-- TODO change to logo -->
-          <ul class="nav navbar-nav navbar-right">
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <a class="navbar-brand" href="/"><b>lucere</b></a>
-            <li><a ng-href="#/user/{{currentUser.id}}">{{currentUser.name}}</a></li>
-            <li><a href="" ng-click="AuthService.logout()">Logout</a></li>
-          </ul>
-        </span>
-        <span ng-hide="AuthService.currentUser">
-          <a href="/user/auth">Login</a>
-        </span>
-      </div>
-    </div><!-- /.container-fluid -->
-
-  </nav>
-
+    <ul class="nav navbar-nav">
+      <li><a ng-href="#/team/{{AuthService.currentUser.teams[0].id}}">Team</a></li>
+    </ul>
+    <!-- TODO change to logo -->
+    <ul class="nav navbar-nav navbar-right">
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <a class="navbar-brand" href="/"><b>lucere</b></a>
+      <li><a ng-href="#/user/{{currentUser.id}}">{{currentUser.name}}</a></li>
+      <li><a href="" ng-click="AuthService.logout()">Logout</a></li>
+    </ul>
+  </span>
+  <span ng-hide="AuthService.currentUser">
+    <a href="/user/auth">Login</a>
+  </span>
 </div>

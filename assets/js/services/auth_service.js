@@ -17,7 +17,7 @@ app.factory("AuthService", ["$http", "$location", function($http, $location) {
 
   var authorizeAdmin = function() {
     return authorizeStudent(function(data) {
-      if (!data.administrating || data.administrating.length) {
+      if (!data.administrating || !data.administrating.length) {
         $location.path("/user/" + data.id);
       }
     })

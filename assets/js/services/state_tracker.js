@@ -11,7 +11,10 @@ app.factory("StateTracker", ["Library", "Module", function(Library, Module) {
 
   currentState.refreshLibrary = function() {
     currentState.loadLibrary(currentState.library.id);
+    currentState.llibraries = Library.query();
   };
+
+  currentState.libraries = Library.query();
 
   return currentState;
 }]);
