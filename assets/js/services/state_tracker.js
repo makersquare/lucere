@@ -1,7 +1,7 @@
 app.factory("StateTracker", ["Library", "Module", "$route", "$q", '$location', function(Library, Module, $route, $q, $location) {
   var currentState = {};
 
-  var viewAsMode = false, viewAsLibrary;
+  var viewAsMode = false;
 
   var currentUser;
 
