@@ -4,7 +4,7 @@ app.factory("Permissions", ["AuthService", function(AuthService) {
   var viewingAsTeam;
 
   service.viewAsButton = function() {
-    AuthService.isAdmin();
+    return AuthService.isAdmin();
   }
 
   service.teamView = function(teamId) {
@@ -14,6 +14,10 @@ app.factory("Permissions", ["AuthService", function(AuthService) {
   service.teamEdit = function(teamId) {
     var teamRights = AuthService.isTeamAdmin(teamId);
     return teamRights && !viewAsEnabled;
+  };
+
+  service.teamCreate = function() {
+    return AuthService.isSuperAdmin();
   };
 
   service.libraryView = function(libraryId) {
