@@ -20,7 +20,7 @@
     </li>
 
     <!-- View As Button -->
-    <li class="dropdown" ng-show="AuthService.isAdmin">
+    <li class="dropdown" ng-show="AuthService.isAdmin()">
       <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View As<span class="caret"></span></a>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="team in AuthService.currentUser.teams">

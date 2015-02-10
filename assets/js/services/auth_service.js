@@ -4,16 +4,15 @@
 
 app.factory("AuthService", ["$http", "$location", "StateTracker", function($http, $location, StateTracker) {
   var service = {};
-  var currentUser;
   var request;
 
   service.isLoggedIn = function() {
-    return !!currentUser;
+    return !!service.currentUser;
   };
 
   service.isAdmin = function() {
     if (!service.isLoggedIn()) { return false; }
-    return currentUser.administrating.length > 0;
+    return service.currentUser.administrating.length > 0;
   };
 
   service.isSuperAdmin = service.isAdmin;
@@ -25,7 +24,7 @@ app.factory("AuthService", ["$http", "$location", "StateTracker", function($http
     var itemKey = options.library ? "library" : "id";
 
     var result = false;
-    currentUser[listKey].forEach(function(item) {
+    service.currentUser[listKey].forEach(function(item) {
       if (item[itemKey] == options.id) {
         result = true;
       }
@@ -65,7 +64,7 @@ app.factory("AuthService", ["$http", "$location", "StateTracker", function($http
 
   service.isLibraryMember = function(libraryId, teamId) {
     var result = false;
-    currentUser.teams.forEach(function(team) {
+    service.currentUser.teams.forEach(function(team) {
       if (team.library == libraryId && teamId == team.id) {
         result = true;
       }
