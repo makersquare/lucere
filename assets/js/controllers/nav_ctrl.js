@@ -1,3 +1,3 @@
-app.controller("NavCtrl", ['$scope', 'StateTracker', function($scope, StateTracker) {
-  $scope.StateTracker = StateTracker;
+app.controller("NavCtrl", ['$scope', 'Permissions', function($scope, Permissions) {
+  $scope.Permissions = Permissions;
 }]);

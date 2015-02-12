@@ -14,7 +14,6 @@ var app = angular.module("Lucere", ["ngResource", "ngRoute", "dndLists"])
       }
 
       addLibraryResolves(options.resolve);
-
       return this.when(url, options);
     };
 

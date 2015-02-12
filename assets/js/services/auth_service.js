@@ -80,12 +80,11 @@ app.factory("AuthService", ["$http", "$location", "StateTracker", function($http
     });
   };
 
-  service.authorizeStudent = function() {
-    return request.success(function(data) {
+  service.authorizeStudent = function(cb) {
+    return userRequest().success(function(data) {
       if (!data) {
         $location.path("/login");
       } else if(cb) {
-        console.log(data);
         cb(data);
       }
     })
@@ -95,7 +94,7 @@ app.factory("AuthService", ["$http", "$location", "StateTracker", function($http
   };
 
   service.authorizeAdmin = function() {
-    return authorizeStudent(function(data) {
+    return service.authorizeStudent(function(data) {
       if (!data.administrating || !data.administrating.length) {
         $location.path("/user/" + data.id);
       }
