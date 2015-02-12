@@ -1,0 +1,32 @@
+<div class="col-lg-9" ng-cloak>
+  <span ng-show="AuthService.currentUser">
+    <ul class="nav navbar-nav">
+      <li><a ng-href="#/library/{{AuthService.currentUser.teams[0].library}}">Library</a></li>
+      <li><a ng-href="#/team/{{AuthService.currentUser.teams[0].id}}">Team</a></li>
+
+      <!-- View As Button -->
+      <li class="dropdown" ng-show="Permissions.viewAsButton()">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View As<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="team in AuthService.currentUser.teams">
+            <a ng-click="Permissions.viewAsTeam(team.id)">{{team.name}}</a>
+          </li>
+          <li><a ng-click="Permissions.viewAsAdmin()">Admin</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- TODO change to logo -->
+    <ul class="nav navbar-nav navbar-right">
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <a class="navbar-brand" href="/"><b>lucere</b></a>
+      <li><a ng-href="#/user/{{currentUser.id}}">{{currentUser.name}}</a></li>
+      <li><a href="" ng-click="AuthService.logout()">Logout</a></li>
+    </ul>
+
+  </span>
+  <span ng-hide="AuthService.currentUser">
+    <a href="/user/auth">Login</a>
+  </span>
+</div>

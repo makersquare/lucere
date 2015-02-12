@@ -1,1 +1,12 @@
-<student-module-directive></student-module-directive>
+<div class="container">
+  <div class="row">
+     <h2>{{module.name}}</h2>
+  </div>
+  <div class="row">
+    <ul ng-repeat="lesson in module.lessons">
+      <li>
+        <a ng-href="/#/library/{{module.library.id}}/module/{{module.id}}/lesson/{{lesson.id}}">{{lesson.title}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

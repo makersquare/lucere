@@ -1,95 +1,33 @@
-app.controller("TeamCtrl", ["$scope", "$routeParams", "Team", "User", "AuthService", function($scope, $routeParams, Team, User, AuthService){
+app.controller("TeamCtrl", ["$scope", "$routeParams", "Team", "AuthService", "Permissions", function($scope, $routeParams, Team, AuthService, Permissions){
   var teamId = parseInt($routeParams.teamId);
   $scope.team = Team.get({id: teamId});
   $scope.newUser = {};
   $scope.newTeam = {};
-  $scope.isAdmin = false;
-  $scope.isCore  = teamId === 1;
-  var currentUser;
-
-  var getAdminStatus = function() {
-    AuthService.currentUser(function(user) {
-      currentUser = user;
-      $scope.isAdmin = user.administrating.reduce(function(a, b) {
-        return a || b.id === teamId;
-      }, false);
-    });
-  }
-
-  getAdminStatus();
-
-  $scope.adminsThis = function(thisUserId) {
-    var admining = false;
-    $scope.team.admins.forEach(function(admin) {
-      if(admin.id == thisUserId) {
-        admining = true;
-      }
-    });
-    return admining;
-  }
+  $scope.newAdmin = {};
+  $scope.AuthService = AuthService;
   
-  // Gets user from server
-  // executes successCb or failureCb depending on server response
-  var getUser = function(userName, successCb, failureCb) {
-    var userPromise = User.UserFindBy.get({github: userName});
-    userPromise.$promise.then(
-      function(user) {
-        if(successCb) {
-          successCb(user);
-        }
-      }, function(response) {
-        if(failureCb) {
-          failureCb(response);
-        }
-      }
-    );
-  }
-
   $scope.addUser = function() {
-    var _this = this;
-    var userName = $scope.newUser.name;
-    var userFound = function(user) {
-      $scope.team.users.push(user);
-      $scope.team.$update();
-    };
-    var userNotFound = function(response) {
-      alert(userName + " is not a user yet.\nGo to /admin/user/create || /user/create.")
-    };
-    getUser(userName, userFound, userNotFound);
-    $scope.newUser.name = "";
+    TeamManager.addUserByName($scope.newUser.name, $scope.team);
+    $scope.newUser = {};
   };
 
   $scope.addAdmin = function() {
-    var userName = $scope.newAdmin.name;
-    var userFound = function(user) {
-      $scope.team.users.push(user); // by default, add admin to team users collection
-      $scope.team.admins.push(user);
-      $scope.team.$update();
-    };
-    var userNotFound = function(response) {
-      alert(userName + " is not a user yet.\nGo to /admin/user/create || /user/create.")
-    };
-    getUser(userName, userFound, userNotFound);
-    $scope.newAdmin.name = "";
+    TeamManager.addAdminByName($scope.newAdmin.name, $scope.team);
+    $scope.newAdmin = {};
   }
 
   $scope.remove = function(userId) {
-    $scope.team.users = $scope.team.users.filter(function(v) {
-      if(v.id !== userId) {
-        return v;
-      }
-    });
-    $scope.team.$update();
+    TeamManager.removeUserById(userId, $scope.team);
   };
 
   $scope.addTeam = function() {
     var newTeamName = $scope.newTeam.name;
-    $scope.newTeam.name = "";
     var newTeam = new Team({
-      name: newTeamName,
-      admins: [currentUser],
-      users: [currentUser]
+      name: $scope.newTeam.name,
+      admins: [AuthService.currentUser],
+      users: [AuthService.currentUser]
     });
     newTeam.$save();
+    $scope.newTeam = {};
   }
 }]);

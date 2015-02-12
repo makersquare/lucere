@@ -1,1 +1,17 @@
-<student-library-directive></student-library-directive>
+<div class="container">
+  <div class="row">
+    <h2 class="col-md-12">Library</h2>
+  </div>
+  <div class="row">
+    <ul dnd-list="library.modules" class="col-md-3">
+      <li ng-repeat="module in library.modules"
+        dnd-draggable="module"
+        dnd-moved="module.splice($index,1)"
+        dnd-effect-allowed="move"
+        dnd-selected="models.selected = module"
+        ng-class="{'selected': models.selected === module}">
+        <a href="/#/library/{{library.id}}/module/{{module.id}}">{{module.name}}</a>
+      </li>
+    </ul> 
+  </div> 
+</div> 

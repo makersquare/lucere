@@ -1,5 +1,5 @@
 <div class="panel">
-  <div ng-repeat="module in modules">
+  <div ng-repeat="module in StateTracker.modules">
     <h4><strong><a ng-href="/#/library/{{module.library.id}}/module/{{module.id}}">{{module.name}}</a></strong></h4>
     <ul>
       <li ng-repeat="lesson in module.lessons">

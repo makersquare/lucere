@@ -1,5 +1,5 @@
 app.controller("UserCtrl", ["$scope", "$routeParams", "User", "AuthService", function($scope, $routeParams, User, AuthService) {
-  var userId  = parseInt($routeParams.userId);
+  var userId  = $routeParams.userId;
   var userRecord = User.User.get({id: userId});
   $scope.userForm = {name: "", email: "", github: "", twitter: ""};
   $scope.userPar  = {name: "", email: "", github: "", twitter: ""};
@@ -8,12 +8,9 @@ app.controller("UserCtrl", ["$scope", "$routeParams", "User", "AuthService", fun
     setUserPar();
   });
 
-  $scope.isOwn = false;
   $scope.showForm = false;
-  var currentUser;
-  AuthService.currentUser(function(user) {
-    $scope.isOwn = (userId === user.id);
-  });
+
+  $scope.isOwn = (userId == AuthService.currentUser.id);
 
   var setValues = function(toBeSet, getValsFrom) {
     var keys = Object.keys(getValsFrom);
